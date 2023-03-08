@@ -1,3 +1,17 @@
-controllers:
-    resource: ../src/Controller/
-    type: attribute
+projet:
+    path: /projet
+    controller: App\Controller\ProjetController::projet
+app_login:
+    path: /login
+    # defaults: { _controller: UserBundle:Security:login }
+    controller: App\Controller\LoginController::login
+app_login_check:
+    path: /login_check
+app_logout:
+    path: /logout
+    controller: App\Controller\GalerieController::galerie
+    defaults: {page: 0}
+    requirements: {page: \d*}
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
