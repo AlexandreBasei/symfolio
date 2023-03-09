@@ -10,9 +10,9 @@ app_logout:
 app_register:
     path: /register
     controller: App\Controller\RegistrationController::register
-projet:
-    path: /projet
-    controller: App\Controller\ProjetController::projet
+projets:
+    path: /projets
+    controller: App\Controller\ProjetController::projets
 iut_add:
     path: '/iut/add'
     controller: App\Controller\IutController::add

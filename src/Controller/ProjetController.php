@@ -18,7 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ProjetController extends AbstractController
 {
-    public function projet(ManagerRegistry $doctrine, Request $request): Response
+    public function projets(ManagerRegistry $doctrine, Request $request): Response
     {
         return $this->render('projet/accueil_proj.html.twig');
     }
