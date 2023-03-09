@@ -1,17 +1,18 @@
-projet:
-    path: /projet
-    controller: App\Controller\ProjetController::projet
+
 app_login:
     path: /login
-    # defaults: { _controller: UserBundle:Security:login }
-    controller: App\Controller\LoginController::login
+    controller: App\Controller\SecurityController::login
 app_login_check:
     path: /login_check
 app_logout:
     path: /logout
-    controller: App\Controller\GalerieController::galerie
-    defaults: {page: 0}
-    requirements: {page: \d*}
+    controller: App\Controller\SecurityController::logout
 app_register:
     path: /register
     controller: App\Controller\RegistrationController::register
+projet:
+    path: /projet
+    controller: App\Controller\ProjetController::projet
+iut_add:
+    path: '/iut/add'
+    controller: App\Controller\IutController::add
