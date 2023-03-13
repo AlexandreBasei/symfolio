@@ -12,6 +12,9 @@ app_register:
 projets:
     path: /projets
     controller: App\Controller\ProjetController::projets
+addprojet:
+    path: /projets/add
+    controller: App\Controller\ProjetController::add
 iut_add:
     path: '/iut/add'
     controller: App\Controller\IutController::add

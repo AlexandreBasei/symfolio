@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -39,6 +41,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Noter::class)]
+    private Collection $idNote;
+
+    public function __construct()
+    {
+        $this->idNote = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,6 +164,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Noter>
+     */
+    public function getIdNote(): Collection
+    {
+        return $this->idNote;
+    }
+
+    public function addIdNote(Noter $idNote): self
+    {
+        if (!$this->idNote->contains($idNote)) {
+            $this->idNote->add($idNote);
+            $idNote->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdNote(Noter $idNote): self
+    {
+        if ($this->idNote->removeElement($idNote)) {
+            // set the owning side to null (unless already changed)
+            if ($idNote->getIdUser() === $this) {
+                $idNote->setIdUser(null);
+            }
+        }
 
         return $this;
     }
