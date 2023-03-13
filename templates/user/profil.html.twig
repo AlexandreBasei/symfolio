@@ -7,6 +7,13 @@
     <title>Symfolio - Profil</title>
 </head>
 <body>
-    <h1>{{ app.user.email }}</h1>
+    {% for user in users %}
+    <h1>{{ user.email }}</h1>
+    <h2>{{ user.iut }}<h2>
+    <h2>Niveau {{ user.niveau }}</h2>
+    <img src={{ asset(user.photo) }} alt="Photo de profil">
+    <p>{{ user.description }}</p>
+    
+    {% endfor %}
 </body>
 </html>
