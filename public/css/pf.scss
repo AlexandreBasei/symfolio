@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+html{
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #D9D9D9;
+}
+
+h3{
+    margin: 0;
+    
+}
+
+header{
+    background-color: rgb(75, 177, 211);
+    height: 50px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    #Title{
+        font-size: 1.5rem;
+        
+    }
+
+
+    h3{
+        color: white;
+    }
+}
+
+main{
+
+    padding-left: 30px;
+    padding-right: 30px;
+
+    section{
+
+        display: flex;
+        padding-top: 5vh;
+        flex-flow: wrap row;
+
+        article{
+           position: relative;
+           width: 100vw;
+            
+           #centerfile{
+            display: flex;
+            justify-content: center;
+           }
+
+            /* Masquer le bouton d'origine */
+            input[type="file"] {
+                display: none;
+            }
+            
+            /* Style du bouton personnalisé */
+            .custom-file-button {
+                display: flex;
+                padding: 8px 16px;
+                background-color: blue;
+                color: white;
+                cursor: pointer;
+                border-radius: 30px;
+                justify-content: center;
+                width: 45vw;
+                bottom: 2vh;
+                position: absolute;
+            }
+            
+            /* Lorsqu'on survole le bouton */
+            .custom-file-button:hover {
+                background-color: darkblue;
+            }
+            
+            /* Lorsqu'on clique sur le bouton */
+            .custom-file-button:active {
+                background-color: dodgerblue;
+            }
+
+            #bg-img-fp{
+                background-color: whitesmoke;
+            }
+
+            /* style de l'image prévisualisée */
+            #image-preview {
+                max-width: 100%;
+                max-height: 260px;
+                margin-top: 10px;
+                
+            }
+
+            button{
+                position: absolute;
+                top: -2vh;
+                right: 6vw;
+                width: 15%;
+                height: 18%;
+                border-radius: 50%;
+                border: 0;
+                background-color: rgb(75, 177, 211);
+            }
+            
+            button#modif{
+                right: 16vw;
+            }
+        }
+
+        h4, h5{
+            text-decoration: underline;
+            // text-align: center;
+        }
+        
+        figure{
+            display: flex;
+        }
+
+        img{
+            text-align: center;
+            align-items: center;
+            height: 300px;
+        }
+        
+        p, input[type="textarea"]{
+            border-radius: 10px;
+            background-color: white;
+            border: whitesmoke;
+            height: 10vh;
+            padding: 10px 0px 0 10px;
+            color: rgb(146, 144, 144);
+            width: 98%;
+
+        }
+    }
+}
+
+/* Masquer les boutons radio d'origine */
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Style du bouton radio personnalisé */
+  label {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #666;
+    color: #fff;
+    border-radius: 4px;
+  }
+  
+  /* Lorsqu'on survole le bouton radio */
+  label:hover {
+    background-color: #aaa;
+  }
+  
+  #marks{
+    right:0;
+  }
+
+  /* Lorsqu'un bouton radio est sélectionné */
+  input[type="radio"]:checked + label {
+    border: 3px black solid;
+  }
+  
+  .radio_red{
+    background-color: red;
+  }
+
+  .radio_orange{
+    background-color: orange;
+  }
+
+  .radio_yellow{
+    background-color: yellow;
+  } 
+
+  .radio_lightgreen{
+    background-color: lightgreen;
+  } 
+
+  .radio_green{
+    background-color: green;
+  }
+
+  /* Lorsqu'on survole un bouton radio sélectionné */
+  input[type="radio"]:checked + label:hover {
+    background-color: darkblue;
+  }
+
+  section{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+  input[type="submit"] {
+  
+    margin-bottom: 3vh;
+    display: flex;
+    padding: 8px 16px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border-radius: 30px;
+    justify-content: center;
+    width: 30vw;
+                
+}
+
+footer{
+    background-color: #BEAEC6;
+    height:50px;
+    color: black;
+    padding-top: 20px;
+    padding-left: 30px;
+    width: 92%;
+    position: absolute;
+   
+}

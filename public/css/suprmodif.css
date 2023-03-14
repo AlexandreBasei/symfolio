@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+html {
+  font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #D9D9D9;
+}
+
+h3 {
+  margin: 0;
+}
+
+header {
+  background-color: rgb(75, 177, 211);
+  height: 50px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+header #Title {
+  font-size: 1.5rem;
+}
+header h3 {
+  color: white;
+}
+
+main section {
+  display: flex;
+  padding-top: 5vh;
+  flex-flow: wrap row;
+}
+main section article {
+  position: relative;
+  height: 30%;
+  width: 50%;
+}
+main section article button {
+  position: absolute;
+  top: -2vh;
+  right: 6vw;
+  width: 15%;
+  height: 18%;
+  border-radius: 50%;
+  border: 0;
+  background-color: rgb(75, 177, 211);
+}
+main section article button#modif {
+  right: 16vw;
+}
+main section h4, main section h5 {
+  text-decoration: underline;
+  text-align: center;
+}
+main section figure {
+  display: flex;
+}
+main section img {
+  text-align: center;
+  align-items: center;
+  background-color: #BEAEC6;
+  height: 85px;
+}
+main section p {
+  border-radius: 10px;
+  background-color: white;
+  border: whitesmoke;
+  height: 15vh;
+  padding: 10px 0px 0 10px;
+  color: rgb(146, 144, 144);
+}
+
+footer {
+  background-color: #BEAEC6;
+  height: 50px;
+  color: black;
+  padding-top: 20px;
+  padding-left: 30px;
+  width: 92%;
+  position: absolute;
+}/*# sourceMappingURL=suprmodif.css.map */
