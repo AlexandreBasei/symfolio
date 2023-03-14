@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fil d'actu</title>
+    <link rel="stylesheet" href="../../public/css/pf.css">
+    <link rel="stylesheet" href="../../public/css/menumobile.css">
+    <!-- <link rel="stylesheet" href="{{ asset('css/accueil.css') }}"> -->
+</head>
+
+<body>
+    <header>
+        <h3>Symfolio</h3>
+        <h3 id="Title">ETUDIANTS</h3>
+        <nav>
+
+            <ul id="menu_deroulant">
+                <li><a href="#">Se connecter</a></li>
+                <li><a href="#">Mon portfolio</a></li>
+                <li><a href="#">Fil d'actualité</a></li>
+            </ul>
+    
+            <div class="menu_burger" id="menu_burger"></div>
+    
+            </div>
+        </nav>
+    </header>
+
+    
+    
+    <main>
+        <section>
+            <article>
+                <h4>Visuel de votre Portfolio:</h4>
+                <div id="bg-img-fp">
+                    <img id="image-preview">
+                </div>
+                <div id="centerfile">
+                    <input type="file" name="" id="file-input">
+                    <label for="file-input" class="custom-file-button">Ajout d'une photo</label>
+                </div>
+                </article>
+
+            <article>
+                <h4>Commentaire:</h4>
+                <input type="textarea" placeholder="Ajouter un commentaire à votre publication"></input>
+
+            </article>
+
+            <article>
+
+                <h4>Apprentissages critiques concernés:</h4>
+
+                <input type="radio" name="AC1" id="">AC 1
+                <input type="radio" name="AC2" id="">AC 2
+                <br>
+                <input type="radio" name="AC3" id="">AC 3
+                <input type="radio" name="AC4" id="">AC 4
+                <br>
+                <input type="radio" name="AC5" id="">AC 5
+                <input type="radio" name="AC6" id="">AC 6
+                <br>
+                <input type="radio" name="AC7" id="">AC 7
+                <input type="radio" name="AC8" id="">AC 8
+            </article>
+
+            <article id="marks">
+
+                <h4>Auto-évaluation:</h4>
+
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_red"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_orange"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_yellow"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_lightgreen"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_green"></label>
+                
+                <br>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_red"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_orange"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_yellow"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_lightgreen"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_green"></label>
+                <br>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_red"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_orange"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_yellow"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_lightgreen"></label>
+                <input type="radio" id="radio-button" name="radio-group">
+                <label for="radio-button" class="radio_green"></label>
+                
+            </article>
+
+            <article>
+
+                <h4>Auto-critique:</h4>
+                <input type="textarea" placeholder="Ajouter un commentaire à votre publication"></input>
+
+            </article>
+
+            <section>
+                <input type="submit" value="Publier">
+            </section>
+        </section>
+    </main>
+    <footer><span>ALEXANDRE</span></footer>
+
+    <script src="../../public/js/menumobile.js"></script>
+    <script src="../../public/js/filereaderpreview.js"></script>
+</body>
+
+</html>
