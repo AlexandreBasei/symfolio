@@ -21,11 +21,23 @@ class UserController extends AbstractController
 
     public function profil($id, ManagerRegistry $doctrine, Request $request): Response
     {
-        $em = $doctrine->getManager();
-        $repository = $em->getRepository(User::class);
-        $users = $repository->findBy(
-            array('id' => $id)
-        );
+        if ($id == 0) {
+
+            $id = $this->getUser()->getId();
+            $em = $doctrine->getManager();
+            $repository = $em->getRepository(User::class);
+            $users = $repository->findBy(
+                array('id' => $id)
+            );
+        }
+        else{
+
+            $em = $doctrine->getManager();
+            $repository = $em->getRepository(User::class);
+            $users = $repository->findBy(
+                array('id' => $id)
+            );
+        }
 
         return $this->render('user/profil.html.twig', array(
             'users' => $users,

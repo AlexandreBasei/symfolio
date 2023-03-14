@@ -21,3 +21,5 @@ iut_add:
 profil:
     path: '/profil/{id}'
     controller: App\Controller\UserController::profil
+    defaults: {id: 0}
+    requirements: {page: \d*}
