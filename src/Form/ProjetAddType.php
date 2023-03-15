@@ -22,11 +22,13 @@ class ProjetAddType extends AbstractType
             ->add('nom', TextType::class, ['label' => 'Nom du projet :  '])
             ->add('description', TextareaType::class, ['label' => 'Description du projet :  '])
             ->add('image', FileType::class, ['label' => 'Image du projet :  '])
-            // ->add('tag', TextType::class, ['label' => 'Tags :  '])
-            ->add('date_publi', DateType::class, ['years' => range(2000, date("Y")), 'label' => 'Année de création du projet :  '])
+            ->add('tag', TextType::class, ['label' => 'Tags :  '])
+            ->add('date_publi', DateType::class, ['years' => range(2000, date("Y")), 'label' => 'Date de création du projet :  '])
             ->add('idAc', EntityType::class, [
                 'class' => AC::class,
                 'label' => 'Apprentissages critiques concernés :  ',
+                'multiple' => true,
+                'expanded' => true,
                 'query_builder' => fn (ACRepository $acRepository) =>
                 $acRepository->allAc()
             ])

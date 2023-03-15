@@ -6,6 +6,8 @@ use App\Entity\AC;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AcType extends AbstractType
 {
@@ -15,7 +17,7 @@ class AcType extends AbstractType
             ->add('nom', TextType::class)
             ->add('competence', ChoiceType::class, [
                 'label' => 'Niveau',
-                'placeholder' => 'Sélectionnez votre niveau (année)',
+                'placeholder' => 'Compétence concernée par l\'AC',
                 'choices' => [
                     'Comprendre' => 'Comprendre',
                     'Concevoir' => 'Concevoir',
@@ -24,7 +26,15 @@ class AcType extends AbstractType
                     'Entreprendre' => 'Entreprendre'
                 ]
             ])
-            ->add('niveau', IntegerType::class, ['label' => 'Niveau :  '])
+            ->add('niveau', ChoiceType::class, [
+                'label' => 'Niveau :  ',
+                'placeholder' => 'Niveau de l\'AC',
+                'choices' => [
+                    1 => 1,
+                    2 => 2,
+                    3 => 3
+                ]
+            ])
         ;
     }
 

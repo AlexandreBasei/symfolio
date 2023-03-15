@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\AcType;
 
 class AcController extends AbstractController
 {
@@ -27,10 +28,14 @@ class AcController extends AbstractController
         $form = $this->createForm(AcType::class, $ac);
         $form->handleRequest($request);
 
-        $em = $doctrine->getManager();
-        $em->persist($ac);
-        $em->flush();
+        if ($form->isSubmitted()) {
+            $em = $doctrine->getManager();
+            $em->persist($ac);
+            $em->flush();
+        }
 
-        return $this->render('ac/ac_add.html.twig');
+        return $this->render('ac/ac_add.html.twig', [
+            'acForm' => $form->createView(),
+        ]);
     }
 }

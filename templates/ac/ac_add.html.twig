@@ -1,7 +1,7 @@
 <h1>Ajouter un apprentissage critique</h1>
-{{ form_start(Ac) }}
-    {{ form_row(Ac.nom) }}
-    {{ form_row(Ac.competence) }}
-    {{ form_row(Ac.niveau) }}
-    <button type="submit" class="btn">Ajouter l'AC</button>
-{{ form_end(Ac) }}
+{{ form_start(acForm) }}
+    {{ form_row(acForm.nom) }}
+    {{ form_row(acForm.competence) }}
+    {{ form_row(acForm.niveau) }}
+    <button type="submit" class="btn">Ajouter l'Ac</button>
+{{ form_end(acForm) }}

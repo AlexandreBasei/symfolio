@@ -25,8 +25,8 @@ class Projets
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $tag = [];
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $tag = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_publi = null;
@@ -87,12 +87,12 @@ class Projets
         return $this;
     }
 
-    public function getTag(): array
+    public function getTag(): ?string
     {
         return $this->tag;
     }
 
-    public function setTag(?array $tag): self
+    public function setTag(?string $tag): self
     {
         $this->tag = $tag;
 

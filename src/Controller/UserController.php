@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Projets;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function profil($id, ManagerRegistry $doctrine, Request $request): Response
+    public function profil($id, ManagerRegistry $doctrine): Response
     {
         if ($id == 0) {
 
@@ -39,8 +40,15 @@ class UserController extends AbstractController
             );
         }
 
+        $em2 = $em = $doctrine->getManager();
+        $repository2 = $em2->getRepository(Projets::class);
+        $projets = $repository2->findBy(
+            array('idUser' => $id)
+        );
+
         return $this->render('user/profil.html.twig', array(
             'users' => $users,
+            'projets' => $projets,
         ));
     }
 }
