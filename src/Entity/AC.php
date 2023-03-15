@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ACRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ACRepository::class)]
@@ -22,8 +24,13 @@ class AC
     #[ORM\Column]
     private ?int $niveau = null;
 
-    #[ORM\ManyToOne(inversedBy: 'idAC')]
-    private ?Lier $idLier = null;
+    #[ORM\ManyToMany(targetEntity: Projets::class, mappedBy: 'idAC')]
+    private Collection $idProjet;
+
+    public function __construct()
+    {
+        $this->idProjet = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -66,14 +73,29 @@ class AC
         return $this;
     }
 
-    public function getIdLier(): ?Lier
+    /**
+     * @return Collection<int, Projets>
+     */
+    public function getIdProjet(): Collection
     {
-        return $this->idLier;
+        return $this->idProjet;
     }
 
-    public function setIdLier(?Lier $idLier): self
+    public function addIdProjet(Projets $idProjet): self
     {
-        $this->idLier = $idLier;
+        if (!$this->idProjet->contains($idProjet)) {
+            $this->idProjet->add($idProjet);
+            $idProjet->addIdAC($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdProjet(Projets $idProjet): self
+    {
+        if ($this->idProjet->removeElement($idProjet)) {
+            $idProjet->removeIdAC($this);
+        }
 
         return $this;
     }

@@ -23,3 +23,6 @@ profil:
     controller: App\Controller\UserController::profil
     defaults: {id: 0}
     requirements: {page: \d*}
+ac_add:
+    path: '/ac/add'
+    controller: App\Controller\AcController::add

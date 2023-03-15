@@ -45,6 +45,8 @@ class RegistrationController extends AbstractController
 
             $user->setDescription($form->get('description')->getData());
 
+            $user->setDisplay(0);
+
             $photo = $form->get('photo')->getData();
 
             if ($photo) {

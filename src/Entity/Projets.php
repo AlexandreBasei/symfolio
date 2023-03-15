@@ -31,19 +31,19 @@ class Projets
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_publi = null;
 
-    #[ORM\OneToMany(mappedBy: 'idProjet', targetEntity: Lier::class)]
-    private Collection $idLier;
-
     #[ORM\OneToMany(mappedBy: 'idProjet', targetEntity: Noter::class)]
     private Collection $idNote;
 
     #[ORM\ManyToOne]
     private ?User $idUser = null;
 
+    #[ORM\ManyToMany(targetEntity: AC::class, inversedBy: 'idProjet')]
+    private Collection $idAC;
+
     public function __construct()
     {
-        $this->idLier = new ArrayCollection();
         $this->idNote = new ArrayCollection();
+        $this->idAC = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,36 +112,6 @@ class Projets
     }
 
     /**
-     * @return Collection<int, Lier>
-     */
-    public function getIdLier(): Collection
-    {
-        return $this->idLier;
-    }
-
-    public function addIdLier(Lier $idLier): self
-    {
-        if (!$this->idLier->contains($idLier)) {
-            $this->idLier->add($idLier);
-            $idLier->setIdProjet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdLier(Lier $idLier): self
-    {
-        if ($this->idLier->removeElement($idLier)) {
-            // set the owning side to null (unless already changed)
-            if ($idLier->getIdProjet() === $this) {
-                $idLier->setIdProjet(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Noter>
      */
     public function getIdNote(): Collection
@@ -179,6 +149,30 @@ class Projets
     public function setIdUser(?User $idUser): self
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AC>
+     */
+    public function getIdAC(): Collection
+    {
+        return $this->idAC;
+    }
+
+    public function addIdAC(AC $idAC): self
+    {
+        if (!$this->idAC->contains($idAC)) {
+            $this->idAC->add($idAC);
+        }
+
+        return $this;
+    }
+
+    public function removeIdAC(AC $idAC): self
+    {
+        $this->idAC->removeElement($idAC);
 
         return $this;
     }
