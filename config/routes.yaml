@@ -23,6 +23,9 @@ profil:
     controller: App\Controller\UserController::profil
     defaults: {id: 0}
     requirements: {page: \d*}
+noter:
+    path: '/noter/{id}'
+    controller: App\Controller\UserController::apiAction
 ac_add:
     path: '/ac/add'
     controller: App\Controller\AcController::add

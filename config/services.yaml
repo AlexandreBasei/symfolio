@@ -19,10 +19,7 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-    twig.json_decode:
-        class: AppBundle\Twig\Extension\JsonDecode
-        tags:
-            - { name: twig.extension }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    Twig\JsonExtension: null

@@ -1,0 +1,31 @@
+{# templates/base.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Symfony/Angular App</title>
+</head>
+<body>
+
+<div class="container" ng-app="myApp">
+    <div ng-controller="UserController as userCtrl">
+        <h1>Liste des projets</h1>
+
+        <ul>
+            <li ng-repeat="user in userCtrl.user">
+                <h1>{{ user.email }}</h1>
+                <h2>{{ user.iut }}</h2>
+                <h2>{{ user.niveau }}</h2>
+                <img href={{ user.photo }} alt="Photo de profil">
+                <p>{{ user.description }}</p>
+                {# Affichez les autres informations du projet ici #}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src={{ asset('app.js') }}></script>
+</body>
+</html>

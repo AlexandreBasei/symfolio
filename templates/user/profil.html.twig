@@ -15,12 +15,12 @@
         <p>{{ user.description }}</p>
     {% endfor %}
 
-    <h2>Vos projets</h2>
+    <h2>Projets</h2>
     {% for projet in projets %}
         <h3>{{ projet.nom }}</h3>
         <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
         <img src={{ asset(projet.image) }} alt="Image du projet">
-        <p>{{ projet.tag | json_decode() }}</p>
+        <p>{{ tag }}</p>
         <p>{{ projet.description }}</p>
     {% endfor %}
 </body>
