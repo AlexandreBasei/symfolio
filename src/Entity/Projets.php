@@ -25,14 +25,11 @@ class Projets
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $tag = [];
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $tag = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_publi = null;
-
-    #[ORM\OneToMany(mappedBy: 'idProjet', targetEntity: Lier::class)]
-    private Collection $idLier;
 
     #[ORM\OneToMany(mappedBy: 'idProjet', targetEntity: Noter::class)]
     private Collection $idNote;
@@ -40,10 +37,13 @@ class Projets
     #[ORM\ManyToOne]
     private ?User $idUser = null;
 
+    #[ORM\ManyToMany(targetEntity: AC::class, inversedBy: 'idProjet')]
+    private Collection $idAC;
+
     public function __construct()
     {
-        $this->idLier = new ArrayCollection();
         $this->idNote = new ArrayCollection();
+        $this->idAC = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -87,12 +87,12 @@ class Projets
         return $this;
     }
 
-    public function getTag(): array
+    public function getTag(): ?string
     {
         return $this->tag;
     }
 
-    public function setTag(?array $tag): self
+    public function setTag(?string $tag): self
     {
         $this->tag = $tag;
 
@@ -107,36 +107,6 @@ class Projets
     public function setDatePubli(\DateTimeInterface $date_publi): self
     {
         $this->date_publi = $date_publi;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Lier>
-     */
-    public function getIdLier(): Collection
-    {
-        return $this->idLier;
-    }
-
-    public function addIdLier(Lier $idLier): self
-    {
-        if (!$this->idLier->contains($idLier)) {
-            $this->idLier->add($idLier);
-            $idLier->setIdProjet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdLier(Lier $idLier): self
-    {
-        if ($this->idLier->removeElement($idLier)) {
-            // set the owning side to null (unless already changed)
-            if ($idLier->getIdProjet() === $this) {
-                $idLier->setIdProjet(null);
-            }
-        }
 
         return $this;
     }
@@ -179,6 +149,30 @@ class Projets
     public function setIdUser(?User $idUser): self
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AC>
+     */
+    public function getIdAC(): Collection
+    {
+        return $this->idAC;
+    }
+
+    public function addIdAC(AC $idAC): self
+    {
+        if (!$this->idAC->contains($idAC)) {
+            $this->idAC->add($idAC);
+        }
+
+        return $this;
+    }
+
+    public function removeIdAC(AC $idAC): self
+    {
+        $this->idAC->removeElement($idAC);
 
         return $this;
     }

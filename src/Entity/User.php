@@ -45,6 +45,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Noter::class)]
     private Collection $idNote;
 
+    #[ORM\Column]
+    private ?bool $display = null;
+
     public function __construct()
     {
         $this->idNote = new ArrayCollection();
@@ -194,6 +197,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $idNote->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isDisplay(): ?bool
+    {
+        return $this->display;
+    }
+
+    public function setDisplay(bool $display): self
+    {
+        $this->display = $display;
 
         return $this;
     }

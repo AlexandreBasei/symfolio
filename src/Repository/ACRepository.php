@@ -39,6 +39,12 @@ class ACRepository extends ServiceEntityRepository
         }
     }
 
+    public function allAc()
+    {
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.nom', 'ASC');
+    }
+
 //    /**
 //     * @return AC[] Returns an array of AC objects
 //     */

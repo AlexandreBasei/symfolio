@@ -1,1 +1,11 @@
 <h1>Ajouter un projet</h1>
+
+{{ form_start(projForm) }}
+    {{ form_row(projForm.nom) }}
+    {{ form_row(projForm.description) }}
+    {{ form_row(projForm.image) }}
+    {{ form_row(projForm.tag) }}
+    {{ form_row(projForm.date_publi) }}
+    {{ form_row(projForm.idAc) }}
+    <button type="submit" class="btn">Créer le projet</button>
+{{ form_end(projForm) }}

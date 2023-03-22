@@ -3,16 +3,10 @@ namespace App\Controller;
 
 use App\Entity\Projets;
 use App\Form\ProjetAddType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EntityType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Entity\Image;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use App\Form\ImageType;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -27,18 +21,35 @@ class ProjetController extends AbstractController
         return $this->render('projet/accueil_proj.html.twig');
     }
 
+    //Méthode permettant d'utiliser la fonction explode avec plusieurs séparateurs
+    private function multiexplode ($delimiters,$string) {
+        $ready = str_replace($delimiters, $delimiters[0], $string); //On remplace tous les séparateurs par le premier séparateur du tableau $delimiters
+        $launch = explode($delimiters[0], $ready); //On appelle la fonction explode avec le premier séparateur
+        return  $launch;
+    }
+
     public function add(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger): Response
     {
+        $projet = new Projets();
+
+        $em = $doctrine->getManager();
+
         $user = $this->getUser()->getId();
 
-        $projet = new Projets();
+        $user = $em->getRepository(User::class)->find($user);
 
         $form = $this->createForm(ProjetAddType::class, $projet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $image = $form->get('image')->getData();
+
             $projet->setIdUser($user);
+
+            $tag = $form->get('tag')->getData();
+            $jsonTag = $this->multiexplode(array(",",".","|",":"),$tag);
+            $jsonTag = serialize($jsonTag);
+            $projet->setTag($jsonTag);
 
             if ($image) {
                 $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
@@ -58,13 +69,15 @@ class ProjetController extends AbstractController
 
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
-                $image->setFichier("images/" . $newFilename);
+                $projet->setImage("images/" . $newFilename);
             }
-            $em = $doctrine->getManager();
-            $em->persist($image);
+
+            $em->persist($projet);
             $em->flush(); //C'est là qu'est insérée l'image
         }
 
-        return $this->render('projet/add_proj.html.twig');
+        return $this->render('projet/add_proj.html.twig', [
+            'projForm' => $form->createView(),
+        ]);
     }
 }
