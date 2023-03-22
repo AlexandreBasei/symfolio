@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfolio : Inscription{% endblock %}
+
+{% block body %}
+    <h1>Inscription</h1>
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword) }}
+        {{ form_row(registrationForm.iut) }}
+        {{ form_row(registrationForm.niveau) }}
+        {{ form_row(registrationForm.photo) }}
+        {{ form_row(registrationForm.description) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" class="btn">S'inscrire</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}

@@ -1,0 +1,31 @@
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+app_login_check:
+    path: /login_check
+app_logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+projets:
+    path: /projets
+    controller: App\Controller\ProjetController::projets
+addprojet:
+    path: /projets/add
+    controller: App\Controller\ProjetController::add
+iut_add:
+    path: '/iut/add'
+    controller: App\Controller\IutController::add
+profil:
+    path: '/profil/{id}'
+    controller: App\Controller\UserController::profil
+    defaults: {id: 0}
+    requirements: {page: \d*}
+noter:
+    path: '/noter/{id}'
+    controller: App\Controller\UserController::apiAction
+ac_add:
+    path: '/ac/add'
+    controller: App\Controller\AcController::add
