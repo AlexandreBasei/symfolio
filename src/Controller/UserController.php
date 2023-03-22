@@ -83,7 +83,7 @@ class UserController extends AbstractController
                 'iut' => $user->getIut(),
                 'niveau' => $user->getNiveau(),
                 'photo' => $user->getPhoto(),
-                'descrip^tion' => $user->getDescription()
+                'description' => $user->getDescription()
             );
         }
         return $this->render('user/profilProf.html.twig', $data);
