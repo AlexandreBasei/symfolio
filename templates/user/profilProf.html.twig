@@ -1,31 +1,34 @@
-{# templates/base.html.twig #}
-
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>My Symfony/Angular App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symfolio - Profil</title>
 </head>
 <body>
+    {% for user in users %}
+        <h1>{{ user.email }}</h1>
+        <h2>{{ user.iut }}<h2>
+        <h2>Niveau {{ user.niveau }}</h2>
+        <img src={{ asset(user.photo) }} alt="Photo de profil">
+        <p>{{ user.description }}</p>
+    {% endfor %}
 
-<div class="container" ng-app="myApp">
-    <div ng-controller="UserController as userCtrl">
-        <h1>Liste des projets</h1>
+    <h2>Projets</h2>
+    {% for projet in projets %}
 
-        <ul>
-            <li ng-repeat="user in userCtrl.user">
-                <h1>{{ user.email }}</h1>
-                <h2>{{ user.iut }}</h2>
-                <h2>{{ user.niveau }}</h2>
-                <img href={{ user.photo }} alt="Photo de profil">
-                <p>{{ user.description }}</p>
-                {# Affichez les autres informations du projet ici #}
-            </li>
-        </ul>
-    </div>
-</div>
+        <h3>{{ projet.nom }}</h3>
+        <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
+        <img src={{ asset(projet.image) }} alt="Image du projet">
+        <p>{{ tag }}</p>
+        <p>{{ projet.description }}</p>
+    {% endfor %}
+    
+    {{ form_start(noteForm) }}
+        {{ form_widget(noteForm) }}
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script src={{ asset('app.js') }}></script>
+        <button type="submit" class="btn">Noter</button>
+    {{ form_end(noteForm) }}
 </body>
 </html>

@@ -69,7 +69,7 @@ class RegistrationFormType extends AbstractType
                     3 => 3
                 ]
             ])
-            ->add('photo', FileType::class, ['label' => 'Photo de profil :  '])
+            ->add('photo', FileType::class, ['label' => 'Photo de profil :  ', 'required' => false,])
             ->add('description', TextareaType::class, ['label' => 'Décrivez-vous en quelques lignes :  ']);
     }
 

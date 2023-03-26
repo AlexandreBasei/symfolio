@@ -33,10 +33,11 @@ class IutController extends AbstractController
             $em->flush(); //C'est là qu'est inséré l'IUT
 
             $this->addFlash('success', 'L\'IUT a été ajouté avec succès.');
+            return $this->render('projet/accueil_proj.html.twig');
         }
 
         return $this->render('iut/add.html.twig', [
-            'form' => $form->createView(),
+            'iutForm' => $form->createView(),
         ]);
     }
 
