@@ -13,6 +13,7 @@ use App\Entity\User;
 use App\Form\NoterType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Validator\Constraints\Length;
 
 class UserController extends AbstractController
 {
@@ -52,7 +53,10 @@ class UserController extends AbstractController
             $users = $repository->findBy(
                 array('id' => $id0)
             );
-        } else {
+            $monProfil = true;
+        } 
+        
+        else {
 
             $em = $doctrine->getManager();
             $repository = $em->getRepository(User::class);
@@ -72,21 +76,59 @@ class UserController extends AbstractController
             $tag = $projet->getTag();
             $tag = unserialize($tag);
             $tag = implode(" ", $tag);
-            $idProj = $projet->getId();
             $nProj++;
+        }
+
+        $repository3 = $em->getRepository(Noter::class);
+        $notes = $repository3->findBy(
+            array('idUser' => $id,)
+        );
+
+        $tabProj = [];
+        foreach ($notes as $note) {
+            array_push($tabProj, $note->getIdProjet());
+        }
+
+        $repository4 = $em->getRepository(Projets::class);
+        $notesProj = $repository4->findAll();
+
+        $tabIdUser = [];
+        foreach ($notesProj as $noteProj) {
+            foreach ($tabProj as $tab) {
+                if ($noteProj->getId() == $tab) {
+                    array_push($tabIdUser, $noteProj->getIdUser());
+                }
+            }
+        }
+
+        $repository5 = $em->getRepository(User::class);
+        $notesNom = $repository5->findAll();
+
+        $tabNomUser = [];
+        foreach ($notesNom as $noteNom) {
+            foreach ($tabIdUser as $tabId){
+                if ($noteNom->getId() == $tabId) {
+                    array_push($tabNomUser, $noteNom->getUserIdentifier());
+                }
+            }
         }
 
 
 
-        if (in_array("ROLE_PROF", $role) || in_array("ROLE_ADMIN", $role)) {
+        if (in_array("ROLE_PROF", $role)) {
             $noter = new Noter();
 
-            $form = $this->createForm(NoterType::class, $noter, [
-                'current_user' => $this->getUser(),
+            $form = $this->createForm(NoterType::class, $noter,[
+                'data' => [
+                    'id' => $id,
+                ]
             ]);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                $noter->setIdUser($this->getUser());
+                $noter->setNote($form->get('note')->getData());
+                $noter->setCommentaire($form->get('commentaire')->getData());
                 $em->persist($noter);
                 $em->flush();
             }
@@ -95,20 +137,71 @@ class UserController extends AbstractController
                 $tag = '';
             }
 
+            if (!isset($monProfil)){
+                $monProfil = false;
+            }
+
             return $this->render(
                 'user/profilProf.html.twig',
                 array(
                     'users' => $users,
                     'projets' => $projets,
+                    'notes' => $notes,
                     'tag' => $tag,
+                    'monProfil' => $monProfil,
                     'noteForm' => $form->createView(),
                 )
             );
         }
-        else{
+
+        else if (in_array("ROLE_ADMIN", $role)){
+            $noter = new Noter();
+
+            $form = $this->createForm(NoterType::class, $noter,[
+                'data' => [
+                    'id' => $id,
+                ]
+            ]);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $noter->setIdUser($this->getUser());
+                $noter->setNote($form->get('note')->getData());
+                $noter->setCommentaire($form->get('commentaire')->getData());
+                $em->persist($noter);
+                $em->flush();
+            }
+
+
 
             if (!isset($tag)){
                 $tag = '';
+            }
+
+            if (!isset($monProfil)){
+                $monProfil = false;
+            }
+
+            return $this->render(
+                'user/profilAdmin.html.twig',
+                array(
+                    'users' => $users,
+                    'projets' => $projets,
+                    'tag' => $tag,
+                    'notes' => $notes,
+                    'monProfil' => $monProfil,
+                    'noteForm' => $form->createView(),
+                )
+            );
+        }
+        else {
+
+            if (!isset($tag)){
+                $tag = '';
+            }
+
+            if (!isset($monProfil)){
+                $monProfil = false;
             }
 
             return $this->render(

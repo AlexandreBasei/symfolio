@@ -64,9 +64,4 @@ class ProjetsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-    public function getProjet()
-    {
-        return $this->createQueryBuilder('i')
-            ->orderBy('i.nom', 'ASC');
-    }
 }
