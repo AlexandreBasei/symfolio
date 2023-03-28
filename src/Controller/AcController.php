@@ -38,4 +38,28 @@ class AcController extends AbstractController
             'acForm' => $form->createView(),
         ]);
     }
+
+    public function api(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $nom = $data['nom'];
+        $competence = $data['competence'];
+        $niveau = $data['niveau'];
+      
+        $ac = new AC();
+
+        $ac->setNom($nom);
+        $ac->setCompetence($competence);
+        $ac->setNiveau($niveau);
+
+        $em = $doctrine->getManager();
+        $em->persist($ac);
+        $em->flush();
+      
+        $response = new Response();
+        $response->setContent(json_encode(array('success' => true)));
+        $response->headers->set('Content-Type', 'application/json');
+      
+        return $response;
+    }
 }

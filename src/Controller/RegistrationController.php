@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
             $user->setIut($form->get('iut')->getData());
             // $user->__toString();
 
-            $user->setRoles(array("ROLE_PROF"));
+            $user->setRoles(array("ROLE_ETUDIANT"));
 
             $user->setNiveau($form->get('niveau')->getData());
 
@@ -68,7 +68,7 @@ class RegistrationController extends AbstractController
                 $user->setPhoto("images/" . $newFilename);
             }
             else{
-                $user->setPhoto("images/defaut.jpg");
+                $user->setPhoto("images/default.jpg");
             }
 
             $entityManager->persist($user);

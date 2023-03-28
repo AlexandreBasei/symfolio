@@ -1,8 +1,6 @@
 app_login:
-    path: /login/{role}
+    path: /login
     controller: App\Controller\SecurityController::login
-    defaults: {role: etudiant}
-    requirements: {page: \d*}
 app_login_check:
     path: /login_check
 app_logout:
@@ -21,8 +19,14 @@ iut_add:
     path: '/iut/add'
     controller: App\Controller\IutController::add
 profil:
-    path: '/api/profil/{id}'
+    path: '/profil/{id}'
     controller: App\Controller\UserController::profil
+profil_api:
+    path: '/api/profil/{id}'
+    controller: App\Controller\UserController::api
 ac_add:
     path: '/ac/add'
     controller: App\Controller\AcController::add
+ac_add_api:
+    path: '/api/ac/add'
+    controller: App\Controller\AcController::api

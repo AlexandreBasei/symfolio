@@ -14,6 +14,7 @@ use App\Form\NoterType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends AbstractController
 {
@@ -43,8 +44,18 @@ class UserController extends AbstractController
 
     public function profil($id, ManagerRegistry $doctrine, Request $request, Security $security): Response
     {
-        $id0 = $this->getUser()->getId();
-        $role = $this->getUser()->getRoles();
+        if ($security->isGranted('IS_AUTHENTICATED_FULLY')){
+            $id0 = $this->getUser()->getId();
+            $role = $this->getUser()->getRoles();
+        }
+
+        if (!isset($role)){
+            $role = [];
+        }
+
+        if ($this->getUser()->getId() == $id) {
+            $monProfil = true;
+        }
 
         if ($id == 0) {
 
@@ -53,7 +64,6 @@ class UserController extends AbstractController
             $users = $repository->findBy(
                 array('id' => $id0)
             );
-            $monProfil = true;
         } 
         
         else {
@@ -63,6 +73,10 @@ class UserController extends AbstractController
             $users = $repository->findBy(
                 array('id' => $id)
             );
+
+            if (!$users) {
+                throw new NotFoundHttpException('L\'utilisateur demandé n\'existe pas.');
+            }
         }
 
         $repository2 = $em->getRepository(Projets::class);
@@ -80,40 +94,7 @@ class UserController extends AbstractController
         }
 
         $repository3 = $em->getRepository(Noter::class);
-        $notes = $repository3->findBy(
-            array('idUser' => $id,)
-        );
-
-        $tabProj = [];
-        foreach ($notes as $note) {
-            array_push($tabProj, $note->getIdProjet());
-        }
-
-        $repository4 = $em->getRepository(Projets::class);
-        $notesProj = $repository4->findAll();
-
-        $tabIdUser = [];
-        foreach ($notesProj as $noteProj) {
-            foreach ($tabProj as $tab) {
-                if ($noteProj->getId() == $tab) {
-                    array_push($tabIdUser, $noteProj->getIdUser());
-                }
-            }
-        }
-
-        $repository5 = $em->getRepository(User::class);
-        $notesNom = $repository5->findAll();
-
-        $tabNomUser = [];
-        foreach ($notesNom as $noteNom) {
-            foreach ($tabIdUser as $tabId){
-                if ($noteNom->getId() == $tabId) {
-                    array_push($tabNomUser, $noteNom->getUserIdentifier());
-                }
-            }
-        }
-
-
+        $notes = $repository3->findAll();
 
         if (in_array("ROLE_PROF", $role)) {
             $noter = new Noter();
@@ -127,6 +108,7 @@ class UserController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $noter->setIdUser($this->getUser());
+                $noter->setIdProjet($form->get('idProjet')->getData());
                 $noter->setNote($form->get('note')->getData());
                 $noter->setCommentaire($form->get('commentaire')->getData());
                 $em->persist($noter);
@@ -213,7 +195,9 @@ class UserController extends AbstractController
                 )
             );
         }
+    }
 
+    public function api(){
         // $em = $doctrine->getManager();
         // $repository = $em->getRepository(User::class);
         // $users = $repository->findBy(
@@ -246,5 +230,8 @@ class UserController extends AbstractController
         //     }
         // }
         // return new JsonResponse($data);
+
+        $data = array('foo' => 'bar', 'baz' => 'qux');
+        return $this->render('user/profil.html.twig', array('data' => $data));
     }
 }
