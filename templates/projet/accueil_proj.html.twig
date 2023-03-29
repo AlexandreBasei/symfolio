@@ -32,18 +32,31 @@
         </section>
 
         <section>
-            <h5>Niveau moyens des AC:</h3>
-            <canvas></canvas>
+            <h5>Tous les Portfolios</h3>
+                {% for projet in projets %}
+                    <h3>{{ projet.nom }}</h3>
+                    <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
+                    <img src={{ asset(projet.image) }} alt="Image du projet">
+                    <p>Tags : {{ tag }}</p>
+                    <p>Description : {{ projet.description }}</p>
+                    <h3>Commentaires</h3>
+                        <ul>
+                            {% set break = false %}
+                            {% for note in notes %}
+                                {% if break == false %}
+                                    {% if note.idProjet.id != projet.id %}
+                                        <p>Ce projet n'a reçu aucun commentaire</p>
+                                        {% set break = true %}
+                                    {% else %}
+                                    
+                                        <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
+                                
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                {% endfor %}
         </section>
-
-        <section>
-            <h5>Portfolio le mieux noté:</h3>
-            <!-- section à lier avec symfony -->
-        </section>
-
-
-
-
 
     </main>
     <footer><span>ALEXANDRE</span></footer>
