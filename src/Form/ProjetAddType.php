@@ -28,10 +28,10 @@ class ProjetAddType extends AbstractType
                 ],
             ])
             ->add('tag', TextType::class, [
-                'label' => "Ajout d'une photo",
-                'attr' => [
-                    'class' => 'custom-file-button',
-                ],
+                'label' => false,
+                // 'attr' => [
+                //     'class' => 'custom-file-button',
+                // ],
             ])
             ->add('date_publi', DateType::class, ['years' => range(2000, date("Y")), 'label' => false])
             ->add('idAc', EntityType::class, [

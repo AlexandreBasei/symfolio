@@ -64,7 +64,7 @@
 
   
   
-   <main>
+   <main style='padding-left:15vw;'>
        <section>
         {{ form_start(projForm) }}
            <article class="porfolio">
@@ -73,13 +73,7 @@
                 {{ form_row(projForm.nom) }}
                 
                <h4>Visuel de votre Portfolio:</h4>
-               <div id="bg-img-fp">
-                   <img id="image-preview">
-               </div>
-               <div id="centerfile">
                     {{ form_row(projForm.image) }}
-                   {# <label for="file-input" class="custom-file-button">Ajout d'une photo</label> #}
-               </div>
                </article>
 
 

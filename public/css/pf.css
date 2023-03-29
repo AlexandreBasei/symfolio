@@ -32,14 +32,14 @@ main section article {
   /* Lorsqu'on clique sur le bouton */
   /* style de l'image prévisualisée */
 }
-main section article #centerfile div {
+/* main section article #centerfile {
   display: flex;
   justify-content: center;
-}
-main section article input[type=file] {
-  display: none;
-}
-main section article .custom-file-button {
+} */
+/* main section article input[type=file] {
+  display: block;
+} */
+/* main section article .custom-file-button {
   display: flex;
   padding: 8px 16px;
   background-color: blue;
@@ -50,7 +50,7 @@ main section article .custom-file-button {
   width: 45vw;
   bottom: 2vh;
   position: absolute;
-}
+} */
 main section article .custom-file-button:hover {
   background-color: darkblue;
 }
