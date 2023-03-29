@@ -19,19 +19,24 @@ class ProjetAddType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class, ['label' => 'Nom du projet :  '])
-            ->add('description', TextareaType::class, ['label' => 'Description du projet :  '])
+            ->add('nom', TextType::class, ['label' => false])
+            ->add('description', TextareaType::class, ['label' => false])
             ->add('image', FileType::class, [
-                'label' => 'Image du projet :  ', 
+                'label' => false, 
                 'attr' => [
-                    'id' => 'file-input',
+                    'id' => 'name-field',
                 ],
             ])
-            ->add('tag', TextType::class, ['label' => 'Tags (séparer les tags par des virgules) :  '])
-            ->add('date_publi', DateType::class, ['years' => range(2000, date("Y")), 'label' => 'Date de création du projet :  '])
+            ->add('tag', TextType::class, [
+                'label' => "Ajout d'une photo",
+                'attr' => [
+                    'class' => 'custom-file-button',
+                ],
+            ])
+            ->add('date_publi', DateType::class, ['years' => range(2000, date("Y")), 'label' => false])
             ->add('idAc', EntityType::class, [
                 'class' => AC::class,
-                'label' => 'Apprentissages critiques concernés :  ',
+                'label' => false,
                 'multiple' => true,
                 'expanded' => true,
                 'query_builder' => fn (ACRepository $acRepository) =>

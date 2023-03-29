@@ -7,9 +7,10 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Portfolio</title>
-   <link rel="stylesheet" href="./css/pf.css">
-   <link rel="stylesheet" href="./css/burger.css">
-   <link rel="stylesheet" href="./css/button.css">
+   <link rel="stylesheet" href="{{ asset('css/pf.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/button.css') }}">
+  <script src="{{ asset('js/menu_mobile.js')}}"></script>
    <!-- <link rel="stylesheet" href="{{ asset('css/accueil.css') }}"> -->
 </head>
 
@@ -65,13 +66,18 @@
   
    <main>
        <section>
+        {{ form_start(projForm) }}
            <article class="porfolio">
+                <h4>Nom du portfolio :</h4>
+                <br/>
+                {{ form_row(projForm.nom) }}
+                
                <h4>Visuel de votre Portfolio:</h4>
                <div id="bg-img-fp">
                    <img id="image-preview">
                </div>
                <div id="centerfile">
-                   <input type="file" name="" id="file-input">
+                    {{ form_row(projForm.image) }}
                    <label for="file-input" class="custom-file-button">Ajout d'une photo</label>
                </div>
                </article>
@@ -79,32 +85,32 @@
 
            <article>
                <h4>Commentaire:</h4>
-               <input class="com" type="textarea" placeholder="Ajouter un commentaire à votre publication"></input>
+               {{ form_row(projForm.description) }}
 
 
            </article>
+                    
+            <article>
+                <h4>tags :</h4>
 
+                {{ form_row(projForm.tag) }}   
+            </article>
+            <h4>date de publication :</h4>
+            {{ form_row(projForm.date_publi) }}
 
+            <article>
+                
+            </article>
            <article>
 
 
                <h4>Apprentissages critiques concernés:</h4>
 
             <div class="first">
-               <input type="checkbox" name="AC1" id="">
-               <label for="ac">AC 1</label>
-            
-               <input type="checkbox" name="AC2" id="">
-               <label for="ac">AC 2</label>
-            
-               <input type="checkbox" name="AC3" id="">
-               <label for="ac">AC 3</label>
-            
-               <input type="checkbox" name="AC4" id="">
-               <label for="ac">AC 4</label>
+                {{ form_row(projForm.idAc) }}
             </div>
 
-            <div class="second">
+            <!-- <div class="second">
                <input type="checkbox" name="AC5" id="">
                <label for="ac">AC 5</label>
         
@@ -116,65 +122,9 @@
         
                <input type="checkbox" name="AC8" id="">
                <label for="ac">AC 8</label>
-            </div>
+            </div> -->
 
            </article>
-
-
-           <article id="marks">
-
-
-               <h4>Auto-évaluation:</h4>
-
-
-               <p>Nom de la compétence:</p>
-               <div class="first">
-               <input type="radio" id="radio-first" name="radio-first">
-               <label for="radio-first" class="radio_red"></label>
-               <input type="radio" id="radio-first" name="radio-first">
-               <label for="radio-first" class="radio_orange"></label>
-               <input type="radio" id="radio-first" name="radio-first">
-               <label for="radio-first" class="radio_yellow"></label>
-               <input type="radio" id="radio-first" name="radio-first">
-               <label for="radio-first" class="radio_lightgreen"></label>
-               <input type="radio" id="radio-first" name="radio-first">
-               <label for="radio-first" class="radio_green"></label>
-            </div>
-              
-               <br>
-               
-               <p>Nom de la compétence:</p>
-               <div class="second">
-               <input type="radio" id="radio-second" name="radio-second">
-               <label for="radio-second" class="radio_red"></label>
-               <input type="radio" id="radio-second" name="radio-second">
-               <label for="radio-second" class="radio_orange"></label>
-               <input type="radio" id="radio-second" name="radio-second">
-               <label for="radio-second" class="radio_yellow"></label>
-               <input type="radio" id="radio-second" name="radio-second">
-               <label for="radio-second" class="radio_lightgreen"></label>
-               <input type="radio" id="radio-second" name="radio-second">
-               <label for="radio-second" class="radio_green"></label>
-            </div>
-
-               <br>
-
-               <p>Nom de la compétence:</p> 
-               <div class="third">
-               <input type="radio" id="radio-third" name="radio-third">
-               <label for="radio-third" class="radio_red"></label>
-               <input type="radio" id="radio-third" name="radio-third">
-               <label for="radio-third" class="radio_orange"></label>
-               <input type="radio" id="radio-third" name="radio-third">
-               <label for="radio-third" class="radio_yellow"></label>
-               <input type="radio" id="radio-third" name="radio-third">
-               <label for="radio-third" class="radio_lightgreen"></label>
-               <input type="radio" id="radio-third" name="radio-third">
-               <label for="radio-third" class="radio_green"></label>
-            </div>
-              
-           </article>
-
 
            <article>
 
@@ -187,15 +137,15 @@
 
 
            <section>
-               <input type="submit" value="Publier">
-           </section>
+            <button type="submit" class="btn">Créer le projet</button>
+        </section>
+        {{ form_end(projForm) }}
        </section>
    </main>
    <footer><span>Footer</span></footer>
 
 
-   <script src="./js/script.js"></script>
-  <!-- <script src="../../public/js/filereaderpreview.js"></script> -->
+   
 </body>
 
 
