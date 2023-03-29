@@ -55,52 +55,53 @@
     </header>
 
     
-    {% if monProfil %}
-    {% for user in users %}
-    <main>
-        <section>
-            <article>
-                <div class="absolute">
-                <h4>Votre photo de profil :</h4>
-                <div id="f">
-                    <div id="bg-img-fp">
-                        <img src={{ asset(user.photo) }} alt="Photo de profil">
-                    </div>
-                    <div id="centerfile">
-                        <input type="file" name="" id="file-input">
-                        <label for="file-input" class="custom-file-button">Modifier une photo</label>
-                    </div>
-                </div>
-                    
-                    <section id="section_visible">
-                        <h4 style="width: 50%">Visibilité de mes travaux par les autres</h4>
-                        <input type="radio" name="visibility_pf" id=""> 
-                        <label for="ac">Visible</label>
+    
+        {% for user in users %}
+            <main style="padding-left:5vw;">
+                <section>
+                    <article>
+                        <div class="absolute">
+                        <h4>Votre photo de profil :</h4>
+                        <div id="f">
+                            <div id="bg-img-fp">
+                                <img src={{ asset(user.photo) }} alt="Photo de profil">
+                            </div>
+                            <div id="centerfile">
+                                <input type="file" name="" id="file-input">
+                                <label for="file-input" class="custom-file-button">Modifier une photo</label>
+                            </div>
+                        </div>
+                            
+                            {# <section id="section_visible">
+                                <h4 style="width: 50%">Visibilité de mes travaux par les autres</h4>
+                                <input type="radio" name="visibility_pf" id=""> 
+                                <label for="ac">Visible</label>
 
-                        <input type="radio" name="visibility_pf" id=""> 
-                        <label for="ac">Non visible</label>
-                    </section>
-                </article>
-            </div>
-            <article>
-                <h4>Informations :</h4>
-                <input type="textarea" placeholder="{{ user.description }}"></input>
-                
-                <h4>Adresse email :</h4>
-                <h5>{{ user.email }}</h5>
+                                <input type="radio" name="visibility_pf" id=""> 
+                                <label for="ac">Non visible</label>
+                            </section> #}
+                        </article>
+                    </div>
+                    <article>
+                        <h4>Informations :</h4>
+                        <p style="width:fit-content;padding:20px;">{{ user.description }}</p>
+                        
+                        <h4>Adresse email :</h4>
+                        <h5>{{ user.email }}</h5>
 
-                <h4>Lieu d'étude :</h4>
-                <h5>{{ user.iut }}</h5>
-            </article>
-            {% endfor %}
+                        <h4>Lieu d'étude :</h4>
+                        <h5>{{ user.iut }}</h5>
+                    </article>
+        {% endfor %}
             <!-- <section>
                 <input class="modify" type="submit" value="Modifier">
             </section> -->
         </section>
-    </main>
 
         <h2>Projets</h2>
-        <button><a href="{{ url('addprojet') }}">Ajouter un projet</a></button>
+        {% if monProfil %}
+            <button><a href="{{ url('addprojet') }}">Ajouter un projet</a></button>
+        {% endif %}
         {% for projet in projets %}
                 <h3>{{ projet.nom }}</h3>
                 <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
@@ -124,42 +125,8 @@
                         {% endfor %}
                     </ul>
         {% endfor %}
-
-    {% else %}
-        {% for user in users %}
-            <h1>{{ user.email }}</h1>
-            <h2>{{ user.iut }}<h2>
-            <h2>Niveau {{ user.niveau }}</h2>
-            <img src={{ asset(user.photo) }} alt="Photo de profil">
-            <p>{{ user.description }}</p>
-        {% endfor %}
-
-        <h2>Projets</h2>
-        {% for projet in projets %}
-                <h3>{{ projet.nom }}</h3>
-                <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
-                <img src={{ asset(projet.image) }} alt="Image du projet">
-                <p>Tags : {{ tag }}</p>
-                <p>{{ projet.description }}</p>
-                <h3>Commentaires</h3>
-                    <ul>
-                        {% set break = false %}
-                        {% for note in notes %}
-                            {% if break == false %}
-                                {% if note.idProjet.id != projet.id %}
-                                    <p>Ce projet n'a reçu aucun commentaire</p>
-                                    {% set break = true %}
-                                {% else %}
-                                
-                                    <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
-                            
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-        {% endfor %}
-    {% endif %}
-        <footer><span>Footer</span></footer>
-
+    </main>
+    <footer><span>Footer</span></footer>
+    
 </body>
 </html>
