@@ -44,16 +44,17 @@ class UserController extends AbstractController
 
     public function profil($id, ManagerRegistry $doctrine, Request $request, Security $security): Response
     {
+        $role = [];
+        $id0 = 0;
+        $tag = '';
+        $monProfil = false;
+
         if ($security->isGranted('IS_AUTHENTICATED_FULLY')){
             $id0 = $this->getUser()->getId();
             $role = $this->getUser()->getRoles();
         }
 
-        if (!isset($role)){
-            $role = [];
-        }
-
-        if ($this->getUser()->getId() == $id) {
+        if ($id != 0 && $id0 == $id){
             $monProfil = true;
         }
 
@@ -64,6 +65,9 @@ class UserController extends AbstractController
             $users = $repository->findBy(
                 array('id' => $id0)
             );
+
+            $id = $id0;
+            $monProfil = true;
         } 
         
         else {
@@ -115,14 +119,6 @@ class UserController extends AbstractController
                 $em->flush();
             }
 
-            if (!isset($tag)){
-                $tag = '';
-            }
-
-            if (!isset($monProfil)){
-                $monProfil = false;
-            }
-
             return $this->render(
                 'user/profilProf.html.twig',
                 array(
@@ -131,7 +127,9 @@ class UserController extends AbstractController
                     'notes' => $notes,
                     'tag' => $tag,
                     'monProfil' => $monProfil,
-                    'noteForm' => $form->createView(),
+                    'id0' => $id0,
+                    'id' => $id,
+                    'noteForm' => $form->createView()
                 )
             );
         }
@@ -154,16 +152,6 @@ class UserController extends AbstractController
                 $em->flush();
             }
 
-
-
-            if (!isset($tag)){
-                $tag = '';
-            }
-
-            if (!isset($monProfil)){
-                $monProfil = false;
-            }
-
             return $this->render(
                 'user/profilAdmin.html.twig',
                 array(
@@ -172,29 +160,47 @@ class UserController extends AbstractController
                     'tag' => $tag,
                     'notes' => $notes,
                     'monProfil' => $monProfil,
+                    'id0' => $id0,
+                    'id' => $id,
                     'noteForm' => $form->createView(),
                 )
             );
         }
         else {
 
-            if (!isset($tag)){
-                $tag = '';
-            }
-
-            if (!isset($monProfil)){
-                $monProfil = false;
-            }
-
             return $this->render(
                 'user/profil.html.twig',
                 array(
                     'users' => $users,
                     'projets' => $projets,
+                    'notes' => $notes,
                     'tag' => $tag,
+                    'monProfil' => $monProfil,
                 )
             );
         }
+    }
+
+    public function delete_comment($idNote, $idUser, $idPage, ManagerRegistry $doctrine, Security $security): Response{
+
+        if ($security->isGranted('IS_AUTHENTICATED_FULLY')){
+            $id0 = $this->getUser()->getId();
+
+            if ($id0 == $idUser) //On vérifie que c'est bien l'utilisateur connecté qui veut supprimer un commentaire
+            {
+                //Récupération du commentaire
+                $em = $doctrine->getManager();
+                $repository = $em->getRepository(Noter::class);
+                $note = $repository->find($idNote);
+            
+                // Suppression du commentaire
+                $em->remove($note);
+                $em->flush();
+            }
+        }
+
+        return $this->redirectToRoute('profil', ['id' => $idPage]);
+
     }
 
     public function api(){

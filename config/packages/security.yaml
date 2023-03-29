@@ -34,7 +34,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/profil, roles: ROLE_ETUDIANT }
         - { path: ^/projets/add, roles: ROLE_ETUDIANT }
         - { path: ^/ac/add, roles: ROLE_ADMIN }
         - { path: ^/iut/add, roles: ROLE_ADMIN }

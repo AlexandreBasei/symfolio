@@ -1,19 +1,81 @@
+<!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src={{ asset('js/angular.min.js') }}></script>
-        <script src={{ asset('js/profilJS.js') }}></script>
-        <title>Symfolio - Profil</title>
-    </head>
-    <body>
-    {% block javascripts %}
-        <script>
-            var initData = {{ data|json_encode|raw }};
-        </script>
-    {% endblock %}
-    <h1 ng-bind="donnee">{{ donnee["foo"] }}</h1>
-    {# <div ng-repeat="dataa in data" ng-bind="dataa"></div> #}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# <script src={{ asset('js/angular.min.js') }}></script>
+    <script src={{ asset('js/app.js') }}></script> #}
+    <title>Symfolio - Profil</title>
+</head>
+<body>
+    {% if monProfil %}
+        {% for user in users %}
+            <h1>{{ user.email }}</h1>
+            <h2>{{ user.iut }}<h2>
+            <img src={{ asset(user.photo) }} alt="Photo de profil">
+            <p>{{ user.description }}</p>
+        {% endfor %}
+
+        <h2>Projets</h2>
+        <button><a href="{{ url('addprojet') }}">Ajouter un projet</a></button>
+        {% for projet in projets %}
+                <h3>{{ projet.nom }}</h3>
+                <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
+                <img src={{ asset(projet.image) }} alt="Image du projet">
+                <p>Tags : {{ tag }}</p>
+                <p>Description : {{ projet.description }}</p>
+                <h3>Commentaires</h3>
+                    <ul>
+                        {% set break = false %}
+                        {% for note in notes %}
+                            {% if break == false %}
+                                {% if note.idProjet.id != projet.id %}
+                                    <p>Ce projet n'a reçu aucun commentaire</p>
+                                    {% set break = true %}
+                                {% else %}
+                                
+                                    <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
+                            
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+        {% endfor %}
+
+    {% else %}
+        {% for user in users %}
+            <h1>{{ user.email }}</h1>
+            <h2>{{ user.iut }}<h2>
+            <h2>Niveau {{ user.niveau }}</h2>
+            <img src={{ asset(user.photo) }} alt="Photo de profil">
+            <p>{{ user.description }}</p>
+        {% endfor %}
+
+        <h2>Projets</h2>
+        {% for projet in projets %}
+                <h3>{{ projet.nom }}</h3>
+                <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
+                <img src={{ asset(projet.image) }} alt="Image du projet">
+                <p>Tags : {{ tag }}</p>
+                <p>{{ projet.description }}</p>
+                <h3>Commentaires</h3>
+                    <ul>
+                        {% set break = false %}
+                        {% for note in notes %}
+                            {% if break == false %}
+                                {% if note.idProjet.id != projet.id %}
+                                    <p>Ce projet n'a reçu aucun commentaire</p>
+                                    {% set break = true %}
+                                {% else %}
+                                
+                                    <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
+                            
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+        {% endfor %}
+    {% endif %}
+</body>
 </html>
