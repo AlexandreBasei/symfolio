@@ -9,20 +9,29 @@ html, body {
   background-color: #D9D9D9;
 }
 
+nav {
+  background-color: purple;
+}
+
 h3 {
   margin: 0;
 }
 
-header {
-  background-color: purple;
-  height: 50px;
-  padding-bottom: 20px;
-  padding-top: 40px;
-  padding-left: 30px;
+img {
+    width: 150px;
+    display: block;
+    margin: auto;
 }
-header h3 {
-  color: white;
+
+.rectangle{
+    display: block;
+    margin: auto;
+    width:150px;
+    height:200px;
+    background: #f5f5ff;
+    margin-bottom: 5%;
 }
+
 
 main {
   padding-left: 30px;
@@ -31,9 +40,7 @@ main {
 main section h4, main section h5 {
   text-decoration: underline;
 }
-main section p, main section img {
-  display: inline-block;
-}
+
 
 footer {
   background-color: #BEAEC6;
@@ -42,3 +49,24 @@ footer {
   padding-top: 20px;
   padding-left: 30px;
 }/*# sourceMappingURL=accueil.css.map */
+
+@media screen and (min-width: 900px) {
+
+
+    p {
+        width: 70%;
+    }
+    
+    img {
+        position: absolute;
+        top: 140px;
+        right: 9%;
+    }
+
+    .portfolio {
+        position: absolute;
+        top: 300px;
+        right: 9%;
+    }
+
+}

@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+ }
+ 
+ html {
+     height: 100vh;
+ }
+ 
+ html body {
+ 
+     height: 100vh;
+ }
+ 
+ h1 {
+     text-transform: uppercase;
+ }
+ 
+ nav {
+     background-color: gray;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 60px;
+ }
+
+ div.button {
+    position: absolute;
+    width: 100vw;
+    bottom: 10vh;
+    display: flex; 
+    justify-content: center;
+
+  }
+ 
+ button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:gray;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1em;
+    padding:0 1em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    border-radius: 10px;
+}
+
+ 
+ h2 {
+     text-decoration: underline;
+     width: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     padding-top: 10%;
+ }
+ 
+ .champ {
+     padding-top: 50px;
+ }
+ 
+ .form {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     padding-top: 10%;
+     
+ }
+ 
+ nav {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+}
+
+li {
+    padding: 5%;
+    list-style: none;
+}
+
+.home {
+    position: absolute;
+    left: 3%;
+    top: 25%;
+}
+
+
+    /* Bouton BURGER */
+
+nav ul.menu_deroulant {
+  
+    font-size: 30px;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: scale(1), translate(130);
+    opacity: 1;
+    background-color: #4E4E4E;
+    transition: all 0.5s ease;
+    z-index: 1;
+    }
+
+
+
+nav ul {
+    height: 300px;
+    position: absolute;
+    top: -300px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease-out;
+    transform: translate(130);
+    opacity: 0;
+    
+}
+
+
+nav div.menu_burger {
+    width: 60px;
+    height: 100%;
+    background-image: url(../img/svg/btn_menu.svg);
+    cursor: crosshair;
+    z-index: 2;
+    position: absolute;
+    right: 2%;
+    background-repeat: no-repeat;
+}
+
+nav div.ouvert {
+    background-image: url(../img/svg/btn_fermer.svg);
+}
+
+
+@media screen and (min-width: 900px) {
+
+    html, body{
+        width: 100vw;
+    } 
+    a {
+        text-decoration: none;
+        color: black;
+        font-size: 25px;
+        margin-left: 2%;
+    }
+
+    nav {
+        width: 100vw;
+    }
+
+    h1 {
+        position: absolute;
+        left: 155px;
+        top: 19px;
+    }
+
+    li {
+    
+        list-style: none;
+        padding: 0%;
+        display: inline-block;
+        width: 20%;
+    }
+
+    #menu_burger{
+        display: none;
+    }   
+
+    ul#menu_deroulant {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        position: absolute;
+        height: 20%;
+        top: 25px;
+        right: 5%;
+        opacity: 1;
+
+    }
+
+    button{
+        background:gray;
+        color:#fff;
+        border:none;
+        position:relative;
+        height:60px;
+        font-size:1em;
+        padding:0 2em;
+        cursor:pointer;
+        transition:800ms ease all;
+        outline:none;
+        border-radius: 10px;
+      }
+      button:hover{
+        background:#fff;
+        color:gray;
+      }
+      button:before,
+      button:after{
+        content:'';
+        position:absolute;
+        top:0;
+        right:0;
+        height:2px;
+        width:0;
+        background: gray;
+        transition:400ms ease all;
+      }
+      button:after{
+        right:inherit;
+        top:inherit;
+        left:0;
+        bottom:0;
+      }
+      button:hover:before,
+      button:hover:after{
+        width:100%;
+        transition:800ms ease all;
+      }
+
+}

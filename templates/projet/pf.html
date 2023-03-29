@@ -1,128 +1,202 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fil d'actu</title>
-    <link rel="stylesheet" href="../../public/css/pf.css">
-    <link rel="stylesheet" href="../../public/css/menumobile.css">
-    <!-- <link rel="stylesheet" href="{{ asset('css/accueil.css') }}"> -->
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Portfolio</title>
+   <link rel="stylesheet" href="./css/pf.css">
+   <link rel="stylesheet" href="./css/burger.css">
+   <link rel="stylesheet" href="./css/button.css">
+   <!-- <link rel="stylesheet" href="{{ asset('css/accueil.css') }}"> -->
 </head>
 
+
 <body>
-    <header>
-        <h3>Symfolio</h3>
-        <h3 id="Title">ETUDIANTS</h3>
-        <nav>
+   <header>
+       <nav>
+        <a href="#" class="home"><lord-icon
+            src="https://cdn.lordicon.com/slduhdil.json"
+            trigger="hover"
+            colors="primary:#f5f5f5"
+            colors="primary:#121331"
+            state="hover-2"
+            style="width:30px;height:30px">
+        </lord-icon></a>
 
-            <ul id="menu_deroulant">
-                <li><a href="#">Se connecter</a></li>
-                <li><a href="#">Mon portfolio</a></li>
-                <li><a href="#">Fil d'actualité</a></li>
-            </ul>
+        <div>
+            <h1>administrateurs</h1>
+        </div>
+
+        <ul id="menu_deroulant">
+            <li><a href="#" class="arrow"><lord-icon
+                src="https://cdn.lordicon.com/jxwksgwv.json"
+                trigger="hover"
+                colors="primary:#f5f5f5"
+                state="hover-3"
+                target=".arrow"
+                style="width:25px;height:25px">
+            </lord-icon>Se connecter</a></li>
+            <li><a href="#" class="page"><lord-icon
+                src="https://cdn.lordicon.com/ogkplaef.json"
+                trigger="hover"
+                colors="primary:#f5f5f5"
+                target=".page"
+                style="width:25px;height:25px">
+            </lord-icon>Mon portfolio</a></li>
+            <li><a href="#" class="book"><lord-icon
+                src="https://cdn.lordicon.com/qvbrkejx.json"
+                trigger="morph"
+                colors="primary:#f5f5f5"
+                target=".book"
+                style="width:25px;height:25px">
+            </lord-icon>Fil d'actualité</a></li>
+        </ul>
     
-            <div class="menu_burger" id="menu_burger"></div>
-    
+           <div class="menu_burger" id="menu_burger"></div>
+  
+       </nav>
+   </header>
+
+
+  
+  
+   <main>
+       <section>
+           <article class="porfolio">
+               <h4>Visuel de votre Portfolio:</h4>
+               <div id="bg-img-fp">
+                   <img id="image-preview">
+               </div>
+               <div id="centerfile">
+                   <input type="file" name="" id="file-input">
+                   <label for="file-input" class="custom-file-button">Ajout d'une photo</label>
+               </div>
+               </article>
+
+
+           <article>
+               <h4>Commentaire:</h4>
+               <input class="com" type="textarea" placeholder="Ajouter un commentaire à votre publication"></input>
+
+
+           </article>
+
+
+           <article>
+
+
+               <h4>Apprentissages critiques concernés:</h4>
+
+            <div class="first">
+               <input type="checkbox" name="AC1" id="">
+               <label for="ac">AC 1</label>
+            
+               <input type="checkbox" name="AC2" id="">
+               <label for="ac">AC 2</label>
+            
+               <input type="checkbox" name="AC3" id="">
+               <label for="ac">AC 3</label>
+            
+               <input type="checkbox" name="AC4" id="">
+               <label for="ac">AC 4</label>
             </div>
-        </nav>
-    </header>
 
-    
-    
-    <main>
-        <section>
-            <article>
-                <h4>Visuel de votre Portfolio:</h4>
-                <div id="bg-img-fp">
-                    <img id="image-preview">
-                </div>
-                <div id="centerfile">
-                    <input type="file" name="" id="file-input">
-                    <label for="file-input" class="custom-file-button">Ajout d'une photo</label>
-                </div>
-                </article>
+            <div class="second">
+               <input type="checkbox" name="AC5" id="">
+               <label for="ac">AC 5</label>
+        
+               <input type="checkbox" name="AC6" id="">
+               <label for="ac">AC 6</label>
+        
+               <input type="checkbox" name="AC7" id="">
+               <label for="ac">AC 7</label>
+        
+               <input type="checkbox" name="AC8" id="">
+               <label for="ac">AC 8</label>
+            </div>
 
-            <article>
-                <h4>Commentaire:</h4>
-                <input type="textarea" placeholder="Ajouter un commentaire à votre publication"></input>
+           </article>
 
-            </article>
 
-            <article>
+           <article id="marks">
 
-                <h4>Apprentissages critiques concernés:</h4>
 
-                <input type="radio" name="AC1" id="">AC 1
-                <input type="radio" name="AC2" id="">AC 2
-                <br>
-                <input type="radio" name="AC3" id="">AC 3
-                <input type="radio" name="AC4" id="">AC 4
-                <br>
-                <input type="radio" name="AC5" id="">AC 5
-                <input type="radio" name="AC6" id="">AC 6
-                <br>
-                <input type="radio" name="AC7" id="">AC 7
-                <input type="radio" name="AC8" id="">AC 8
-            </article>
+               <h4>Auto-évaluation:</h4>
 
-            <article id="marks">
 
-                <h4>Auto-évaluation:</h4>
+               <p>Nom de la compétence:</p>
+               <div class="first">
+               <input type="radio" id="radio-first" name="radio-first">
+               <label for="radio-first" class="radio_red"></label>
+               <input type="radio" id="radio-first" name="radio-first">
+               <label for="radio-first" class="radio_orange"></label>
+               <input type="radio" id="radio-first" name="radio-first">
+               <label for="radio-first" class="radio_yellow"></label>
+               <input type="radio" id="radio-first" name="radio-first">
+               <label for="radio-first" class="radio_lightgreen"></label>
+               <input type="radio" id="radio-first" name="radio-first">
+               <label for="radio-first" class="radio_green"></label>
+            </div>
+              
+               <br>
+               
+               <p>Nom de la compétence:</p>
+               <div class="second">
+               <input type="radio" id="radio-second" name="radio-second">
+               <label for="radio-second" class="radio_red"></label>
+               <input type="radio" id="radio-second" name="radio-second">
+               <label for="radio-second" class="radio_orange"></label>
+               <input type="radio" id="radio-second" name="radio-second">
+               <label for="radio-second" class="radio_yellow"></label>
+               <input type="radio" id="radio-second" name="radio-second">
+               <label for="radio-second" class="radio_lightgreen"></label>
+               <input type="radio" id="radio-second" name="radio-second">
+               <label for="radio-second" class="radio_green"></label>
+            </div>
 
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_red"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_orange"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_yellow"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_lightgreen"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_green"></label>
-                
-                <br>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_red"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_orange"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_yellow"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_lightgreen"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_green"></label>
-                <br>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_red"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_orange"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_yellow"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_lightgreen"></label>
-                <input type="radio" id="radio-button" name="radio-group">
-                <label for="radio-button" class="radio_green"></label>
-                
-            </article>
+               <br>
 
-            <article>
+               <p>Nom de la compétence:</p> 
+               <div class="third">
+               <input type="radio" id="radio-third" name="radio-third">
+               <label for="radio-third" class="radio_red"></label>
+               <input type="radio" id="radio-third" name="radio-third">
+               <label for="radio-third" class="radio_orange"></label>
+               <input type="radio" id="radio-third" name="radio-third">
+               <label for="radio-third" class="radio_yellow"></label>
+               <input type="radio" id="radio-third" name="radio-third">
+               <label for="radio-third" class="radio_lightgreen"></label>
+               <input type="radio" id="radio-third" name="radio-third">
+               <label for="radio-third" class="radio_green"></label>
+            </div>
+              
+           </article>
 
-                <h4>Auto-critique:</h4>
-                <input type="textarea" placeholder="Ajouter un commentaire à votre publication"></input>
 
-            </article>
+           <article>
 
-            <section>
-                <input type="submit" value="Publier">
-            </section>
-        </section>
-    </main>
-    <footer><span>ALEXANDRE</span></footer>
 
-    <script src="../../public/js/menumobile.js"></script>
-    <script src="../../public/js/filereaderpreview.js"></script>
+               <h4>Auto-critique:</h4>
+               <input type="textarea" placeholder="Ajouter un commentaire à votre publication"></input>
+
+
+           </article>
+
+
+           <section>
+               <input type="submit" value="Publier">
+           </section>
+       </section>
+   </main>
+   <footer><span>Footer</span></footer>
+
+
+   <script src="./js/script.js"></script>
+  <!-- <script src="../../public/js/filereaderpreview.js"></script> -->
 </body>
+
 
 </html>
