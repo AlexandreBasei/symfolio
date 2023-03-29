@@ -74,6 +74,8 @@ class ProjetController extends AbstractController
 
             $em->persist($projet);
             $em->flush(); //C'est là qu'est insérée l'image
+
+            return $this->redirectToRoute('profil');
         }
 
         return $this->render('projet/add_proj.html.twig', [

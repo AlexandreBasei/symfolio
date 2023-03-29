@@ -54,13 +54,22 @@
                 <h3>Commentaires</h3>
                     <ul>
                         {% for note in notes %}
-                            {% if note.idProjet.id != projet.id %}
-                                <p>Ce projet n'a reçu aucun commentaire</p>
-                            {% else %}
+                            {% if note.idProjet.id == projet.id %}
                             
-                                <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
+                                <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20
+                                
+                                {% for user in users %}
+                                     {% if id0 == note.idUser.id %} {#Afficher un bouton supprimer à côté des commentaires écrits par l'utilisateur connecté #}
+                                     
+                                            <button><a href="{{ url('delete_comment', {'idNote': note.id, 'idUser': note.idUser.id, 'idPage': id}) }}">Supprimer</a></button>
+
+                                    {% endif %}
+                                {% endfor %}
+
+                                </li>
                         
                             {% endif %}
+                            
                         {% endfor %}
                     </ul>
         {% endfor %}
