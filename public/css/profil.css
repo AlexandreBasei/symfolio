@@ -193,7 +193,7 @@ footer {
 
 
 #infos{
-  margin-top: 15vh;
+  margin-top: 30vh;
 }
 
 
@@ -227,6 +227,10 @@ footer {
 
     #section_visible h4 {
         margin-top: 50px;
+    }
+
+    #infos{
+      margin-top: 0;
     }
 
 }
