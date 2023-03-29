@@ -21,8 +21,13 @@ class ProjetAddType extends AbstractType
         $builder
             ->add('nom', TextType::class, ['label' => 'Nom du projet :  '])
             ->add('description', TextareaType::class, ['label' => 'Description du projet :  '])
-            ->add('image', FileType::class, ['label' => 'Image du projet :  '])
-            ->add('tag', TextType::class, ['label' => 'Tags :  '])
+            ->add('image', FileType::class, [
+                'label' => 'Image du projet :  ', 
+                'attr' => [
+                    'id' => 'file-input',
+                ],
+            ])
+            ->add('tag', TextType::class, ['label' => 'Tags (séparer les tags par des virgules) :  '])
             ->add('date_publi', DateType::class, ['years' => range(2000, date("Y")), 'label' => 'Date de création du projet :  '])
             ->add('idAc', EntityType::class, [
                 'class' => AC::class,
