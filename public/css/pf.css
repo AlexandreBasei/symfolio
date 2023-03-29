@@ -32,7 +32,7 @@ main section article {
   /* Lorsqu'on clique sur le bouton */
   /* style de l'image prévisualisée */
 }
-main section article #centerfile {
+main section article #centerfile div {
   display: flex;
   justify-content: center;
 }
