@@ -1,11 +1,15 @@
-// public/app.js
+var app = angular.module('myApp', []);
 
-angular.module('symfolio', [])
-.controller('UserController', ['$http', function($http) {
-    var vm = this;
+app.controller('myCtrl', function($scope) {
+  $scope.formVisible = false;
 
-    // Récupérez les données de l'API REST
-    $http.get('/profil/noter').then(function(response) {
-        vm.projets = response.data;
-    });
-}]);
+  $scope.showForm = function() {
+    if ($scope.formVisible == false) {
+        $scope.formVisible = true;
+    }
+    else{
+        $scope.formVisible = false;
+    }
+    
+  };
+});

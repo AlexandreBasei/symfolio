@@ -41,8 +41,6 @@ class RegistrationController extends AbstractController
 
             $user->setNiveau($form->get('niveau')->getData());
 
-            $user->setPhoto($form->get('photo')->getData());
-
             $user->setDescription($form->get('description')->getData());
 
             $user->setDisplay(0);
@@ -68,6 +66,9 @@ class RegistrationController extends AbstractController
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                 $user->setPhoto("images/" . $newFilename);
+            }
+            else{
+                $user->setPhoto("images/default.jpg");
             }
 
             $entityManager->persist($user);

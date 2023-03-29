@@ -21,11 +21,12 @@ iut_add:
 profil:
     path: '/profil/{id}'
     controller: App\Controller\UserController::profil
-    defaults: {id: 0}
-    requirements: {page: \d*}
-noter:
-    path: '/noter/{id}'
-    controller: App\Controller\UserController::apiAction
+profil_api:
+    path: '/api/profil/{id}'
+    controller: App\Controller\UserController::api
 ac_add:
     path: '/ac/add'
     controller: App\Controller\AcController::add
+ac_add_api:
+    path: '/api/ac/add'
+    controller: App\Controller\AcController::api

@@ -1,7 +1,44 @@
-<h1>Ajouter un apprentissage critique</h1>
+
+
+{# <h1>Ajouter un apprentissage critique</h1>
 {{ form_start(acForm) }}
     {{ form_row(acForm.nom) }}
     {{ form_row(acForm.competence) }}
     {{ form_row(acForm.niveau) }}
     <button type="submit" class="btn">Ajouter l'Ac</button>
-{{ form_end(acForm) }}
+{{ form_end(acForm) }} #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src={{ asset('js/angular.min.js') }}></script>
+    <script src={{ asset('js/acJS.js') }}></script>
+    <title>Symfolio - Ajouter un Apprentissage Critique</title>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+        <form ng-submit="envoyerFormulaire()">
+            <label>Nom :</label>
+            <input type="text" name="nom" ng-model="nom">
+            <br>
+            <label>Compétence :</label>
+            <select name="competence" ng-model="competence">
+                <option value='concevoir'>Concevoir</option>
+                <option value='comprendre'>Comprendre</option>
+                <option value='exprimer'>Exprimer</option>
+                <option value='developper'>Développer</option>
+                <option value='entreprendre'>Entreprendre</option>
+            </select>
+            <br>
+            <label>Niveau :</label>
+            <select name="niveau" ng-model="niveau">
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+            </select>
+            <br>
+            <button type="submit">Envoyer</button>
+        </form>
+</div>
