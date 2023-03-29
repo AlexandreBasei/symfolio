@@ -20,9 +20,11 @@
                 state="hover-2"
                 style="width:30px;height:30px">
             </lord-icon></a>
-    
+    {% if monProfil %}
+    {% for user in users %}
+
             <div>
-                <h1>professeur</h1>
+                <h1>{{user.email}}</h1>
             </div>
     
             <ul id="menu_deroulant">
@@ -55,8 +57,7 @@
     </header>
 
     
-    {% if monProfil %}
-    {% for user in users %}
+    
     <main>
         <section>
             <article>
