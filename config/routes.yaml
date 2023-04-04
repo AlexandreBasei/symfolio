@@ -35,3 +35,9 @@ ac_add_api:
 delete_comment:
     path: '/profil/note/delete/{idNote}/{idUser}/{idPage}'
     controller: App\Controller\UserController::delete_comment
+delete_projet:
+    path: '/projet/delete/{idProjet}/{idUser}/{idPage}'
+    controller: App\Controller\ProjetController::delete_projet
+edit_projet:
+    path: '/projet/edit/{idProjet}/{idUser}/{idPage}'
+    controller: App\Controller\ProjetController::edit_projet

@@ -107,4 +107,94 @@ class ProjetController extends AbstractController
             'projForm' => $form->createView(),
         ]);
     }
+
+    public function delete_projet($idProjet, $idUser, $idPage, ManagerRegistry $doctrine, Security $security): Response{
+
+        $role = [];
+
+        if ($security->isGranted('IS_AUTHENTICATED_FULLY')){
+            $id0 = $this->getUser()->getId();
+            $role = $this->getUser()->getRoles();
+
+            if ($id0 == $idUser || in_array("ROLE_ADMIN", $role)) //On vérifie que c'est bien l'utilisateur connecté qui veut supprimer un projet
+            {
+                //Récupération du projet
+                $em = $doctrine->getManager();
+                $repository = $em->getRepository(Projets::class);
+                $projet = $repository->find($idProjet);
+            
+                // Suppression du projet
+                $em->remove($projet);
+                $em->flush();
+            }
+        }
+
+        return $this->redirectToRoute('profil', ['id' => $idPage]);
+
+    }
+
+    public function edit_projet($idProjet, $idUser, $idPage, ManagerRegistry $doctrine, Security $security, Request $request, SluggerInterface $slugger): Response{
+
+        $role = [];
+
+        if ($security->isGranted('IS_AUTHENTICATED_FULLY')){
+            $id0 = $this->getUser()->getId();
+            $role = $this->getUser()->getRoles();
+
+            if ($id0 == $idUser || in_array("ROLE_ADMIN", $role)) //On vérifie que c'est bien l'utilisateur connecté qui veut supprimer un projet
+            {
+                //Récupération du projet
+                $em = $doctrine->getManager();
+                $repository = $em->getRepository(Projets::class);
+                $projet = $repository->find($idProjet);
+
+                $form = $this->createForm(ProjetAddType::class, $projet);
+                $form->handleRequest($request);
+                
+                
+                // Modification du projet
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $image = $form->get('image')->getData();
+        
+                    $tag = $form->get('tag')->getData();
+                    $jsonTag = $this->multiexplode(array(",",".","|",":"),$tag);
+                    $jsonTag = serialize($jsonTag);
+        
+                    if ($image) {
+                        $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                        // this is needed to safely include the file name as part of the URL
+                        $safeFilename = $slugger->slug($originalFilename);
+                        $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+        
+                        // Move the file to the directory where brochures are stored
+                        try {
+                            $image->move(
+                                $this->getParameter('image_directory'),
+                                $newFilename
+                            );
+                        } catch (FileException $e) {
+                            // ... handle exception if something happens during file upload
+                        }
+        
+                        // updates the 'brochureFilename' property to store the PDF file name
+                        // instead of its contents
+                        $projet->setImage("images/" . $newFilename);
+                    }
+                    $em->persist($projet);
+                    $em->flush();
+
+                    return $this->redirectToRoute('profil', ['id' => $idPage]);
+                }
+
+                return $this->redirectToRoute('profil', [
+                    'id' => $idPage,
+                    'projet' => $projet,
+                    'projForm' => $form->createView(),
+                ]);
+            }
+        }
+
+        return $this->redirectToRoute('profil', ['id' => $idPage]);
+
+    }
 }

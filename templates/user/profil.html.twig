@@ -96,33 +96,42 @@
             </section> -->
         </section>
 
-        <h2>Projets</h2>
-        {% if monProfil %}
-            <button><a href="{{ url('addprojet') }}">Ajouter un projet</a></button>
-        {% endif %}
-        {% for projet in projets %}
-                <h3>{{ projet.nom }}</h3>
-                <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
-                <img class='imgProjet' src={{ asset(projet.image) }} alt="Image du projet">
-                <p>Tags : {{ tag }}</p>
-                <p>Description : {{ projet.description }}</p>
-                <h3>Commentaires</h3>
-                    <ul>
-                        {% set break = false %}
-                        {% for note in notes %}
-                            {% if break == false %}
-                                {% if note.idProjet.id != projet.id %}
-                                    <p>Ce projet n'a reçu aucun commentaire</p>
-                                    {% set break = true %}
-                                {% else %}
+        <section>
+            <h2>Projets</h2>
+            {% if monProfil %}
+                <a class="bouton" href="{{ url('addprojet') }}">Ajouter un projet</a>
+            {% endif %}
+            {% for projet in projets %}
+                    {% if monProfil %}
+                        <h3>
+                            {{ projet.nom }} 
+                            <a id="supprimer" class="bouton" href="{{ url('delete_projet', {'idProjet': projet.id, 'idUser': projet.idUser.id, 'idPage': id}) }}">Supprimer</a>
+                            <a id="modifier" class="bouton" href="{{ url('edit_projet', {'idProjet': projet.id, 'idUser': projet.idUser.id, 'idPage': id}) }}">Modifier</a>
+                        </h3>
+                    {% endif %}
+                    <h3>{{ projet.nom }}</h3>
+                    <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
+                    <img class='imgProjet' src={{ asset(projet.image) }} alt="Image du projet">
+                    <p>Tags : {{ tag }}</p>
+                    <p>Description : {{ projet.description }}</p>
+                    <h3>Commentaires</h3>
+                        <ul>
+                            {% set break = false %}
+                            {% for note in notes %}
+                                {% if break == false %}
+                                    {% if note.idProjet.id != projet.id %}
+                                        <p>Ce projet n'a reçu aucun commentaire</p>
+                                        {% set break = true %}
+                                    {% else %}
+                                    
+                                        <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
                                 
-                                    <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
-                            
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-        {% endfor %}
+                            {% endfor %}
+                        </ul>
+            {% endfor %}
+        </section>
     </main>
     <footer><span>Footer</span></footer>
     

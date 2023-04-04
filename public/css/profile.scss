@@ -40,6 +40,14 @@ main{
     padding-left: 30px;
     padding-right: 30px;
 
+    #addProjet{
+      font-size: 2rem;
+      background-color: red;
+      position: relative;
+      margin: 50;
+      padding: 0;
+    }
+
     section{
 
         display: flex;
@@ -240,4 +248,14 @@ footer{
     width: 92%;
     position: absolute;
    
+}
+
+@media screen and (min-width: 1280px) {
+  main{
+    #addProjet{
+      width: 20vw;
+      height: 10vh;
+      font-size: 2rem;
+    }
+  }
 }

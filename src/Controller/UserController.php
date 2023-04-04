@@ -177,6 +177,7 @@ class UserController extends AbstractController
                     'notes' => $notes,
                     'tag' => $tag,
                     'monProfil' => $monProfil,
+                    'id' => $id,
                 )
             );
         }
@@ -184,10 +185,13 @@ class UserController extends AbstractController
 
     public function delete_comment($idNote, $idUser, $idPage, ManagerRegistry $doctrine, Security $security): Response{
 
+        $role = [];
+
         if ($security->isGranted('IS_AUTHENTICATED_FULLY')){
             $id0 = $this->getUser()->getId();
+            $role = $this->getUser()->getRoles();
 
-            if ($id0 == $idUser) //On vérifie que c'est bien l'utilisateur connecté qui veut supprimer un commentaire
+            if ($id0 == $idUser || in_array("ROLE_ADMIN", $role)) //On vérifie que c'est bien l'utilisateur connecté qui veut supprimer un commentaire
             {
                 //Récupération du commentaire
                 $em = $doctrine->getManager();

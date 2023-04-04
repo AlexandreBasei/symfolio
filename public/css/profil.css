@@ -144,6 +144,32 @@ input[type=radio]:checked + label {
   background-color: orange;
 }
 
+.bouton{
+  background-color: rgb(0, 166, 255);
+  border-radius: 10px;
+  font-size: 1rem;
+  top: 5%;
+  margin: 5%;
+  padding: 3%;
+  position: relative;
+  color: black;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#supprimer{
+  background-color: rgb(255, 95, 95);
+  padding: 2%;
+  font-size: 0.8rem;
+}
+
+#modifier{
+  background-color: rgb(255, 186, 95);
+  padding: 2%;
+  font-size: 0.8rem;
+}
+
 .radio_yellow {
   background-color: yellow;
 }
@@ -234,6 +260,19 @@ img .imgProjet {
 
     #infos{
       margin-top: 0;
+    }
+
+    .bouton{
+      top: 5%;
+      padding: 1%;
+    }
+
+    #supprimer{
+      padding: 0.5%;
+    }
+
+    #modifier{
+      padding: 0.5%;
     }
 
 }

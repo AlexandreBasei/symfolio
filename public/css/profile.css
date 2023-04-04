@@ -34,6 +34,13 @@ main {
   padding-left: 30px;
   padding-right: 30px;
 }
+main #addProjet {
+  font-size: 2rem;
+  background-color: red;
+  position: relative;
+  margin: 50;
+  padding: 0;
+}
 main section {
   display: flex;
   padding-top: 5vh;
@@ -208,4 +215,12 @@ footer {
   padding-left: 30px;
   width: 92%;
   position: absolute;
+}
+
+@media screen and (min-width: 1280px) {
+  main #addProjet {
+    width: 20vw;
+    height: 10vh;
+    font-size: 2rem;
+  }
 }/*# sourceMappingURL=profile.css.map */
