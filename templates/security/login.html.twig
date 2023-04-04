@@ -3,6 +3,7 @@
 {% block title %}Symfolio - Connexion{% endblock %}
 
 {% block body %}
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -24,6 +25,7 @@
            value="{{ csrf_token('authenticate') }}"
     >
 
+
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
@@ -39,4 +41,11 @@
         Connexion
     </button>
 </form>
+
+    <h2>Pas de compte ? Inscrivez-vous</h2>
+    <a href="{{ url('app_register') }}">Inscription</a>
+
+    <a href="{{ url('projets') }}">Retourner à l'accueil</a>
+
+
 {% endblock %}

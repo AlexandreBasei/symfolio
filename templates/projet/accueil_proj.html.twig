@@ -8,26 +8,76 @@
     <title>Symfolio - Accueil</title>
     {# <link rel="stylesheet" href="../../public/css/accueil.css"> #}
      <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+       <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/button.css') }}">
 </head>
 
 <body>
-    <header>
+   <header>
+       <nav>
+        <a href="{{ url('projets') }}" class="home"><lord-icon
+            src="https://cdn.lordicon.com/slduhdil.json"
+            trigger="hover"
+            colors="primary:#f5f5f5"
+            colors="primary:#121331"
+            state="hover-2"
+            style="width:30px;height:30px">
+        </lord-icon></a>
+
+        <div>
+            <h1>Accueil</h1>
+        </div>
+
+        <ul id="menu_deroulant">
+            <li><a href="{{ url('app_login') }}" class="arrow"><lord-icon
+                src="https://cdn.lordicon.com/jxwksgwv.json"
+                trigger="hover"
+                colors="primary:#f5f5f5"
+                state="hover-3"
+                target=".arrow"
+                style="width:25px;height:25px">
+            </lord-icon>Se connecter</a></li>
+            <li><a href="{{ url('profil') }}" class="page"><lord-icon
+                src="https://cdn.lordicon.com/ogkplaef.json"
+                trigger="hover"
+                colors="primary:#f5f5f5"
+                target=".page"
+                style="width:25px;height:25px">
+            </lord-icon>Mon portfolio</a></li>
+            <li><a href="{{ url('projets') }}" class="book"><lord-icon
+                src="https://cdn.lordicon.com/qvbrkejx.json"
+                trigger="morph"
+                colors="primary:#f5f5f5"
+                target=".book"
+                style="width:25px;height:25px">
+            </lord-icon>Fil d'actualité</a></li>
+        </ul>
+    
+           <div class="menu_burger" id="menu_burger"></div>
+  
+       </nav>
+   </header>
         <h3>Symfolio</h3>
-        <a href="{{ url('app_login', {'role': 'etudiant'}) }}">Connexion</a>
-    </header>
 
     <main>
         <section>
             <article>
                 <h4>Description de la formation</h4>
-                <p>YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI
-                    <img src="{{ asset('images/mmi 1.png') }}" alt="Logo MMI"> YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI </p>
+                <p>La formation MMI (Métiers du Multimédia et de l'Internet) est un cursus de niveau Bac+2 qui forme des professionnels capables de concevoir, réaliser et diffuser des contenus multimédias. Elle mêle des enseignements théoriques et pratiques dans des domaines tels que le web, la vidéo, le graphisme et la communication. Cette formation permet d'accéder à des métiers tels que webdesigner, développeur web, chef de projet multimédia, etc. </p>
                
             </article>
 
             <article>
                 <h4>Les 5 compétences de la formation</h4>
-                <p>YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI YANI </p>
+                <p>- <b>Comprendre :</b> la capacité à comprendre les enjeux et les mécanismes du monde numérique, ainsi que les besoins des utilisateurs et des clients.
+<br/>
+- <b>Entreprendre :</b> la capacité à mener un projet de A à Z, en prenant en compte les contraintes techniques, économiques et humaines.
+<br/>
+- <b>Développer :</b> la capacité à concevoir, coder et intégrer des solutions web, mobiles et multimédias en utilisant des langages de programmation et des outils spécifiques.
+<br/>
+- <b>Exprimer :</b> la capacité à communiquer efficacement ses idées, ses projets et ses réalisations à l'oral et à l'écrit, en utilisant les outils de communication adaptés.
+<br/>
+- <b>Concevoir :</b> la capacité à concevoir des interfaces, des expériences utilisateurs et des contenus multimédias, en utilisant des outils de design graphique et des méthodes de conception centrée utilisateur.</p>
             </article>
         </section>
 

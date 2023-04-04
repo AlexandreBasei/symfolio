@@ -54,6 +54,10 @@ class UserController extends AbstractController
             $role = $this->getUser()->getRoles();
         }
 
+        else {
+            return $this->redirectToRoute('app_login');
+        }
+
         if ($id != 0 && $id0 == $id){
             $monProfil = true;
         }
@@ -88,13 +92,10 @@ class UserController extends AbstractController
             array('idUser' => $id)
         );
 
-        $nProj = 0;
-
         foreach ($projets as $projet) {
             $tag = $projet->getTag();
             $tag = unserialize($tag);
             $tag = implode(" ", $tag);
-            $nProj++;
         }
 
         $repository3 = $em->getRepository(Noter::class);

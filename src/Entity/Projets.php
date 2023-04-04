@@ -40,6 +40,9 @@ class Projets
     #[ORM\ManyToMany(targetEntity: AC::class, inversedBy: 'idProjet')]
     private Collection $idAC;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $critique = null;
+
     public function __construct()
     {
         $this->idNote = new ArrayCollection();
@@ -173,6 +176,18 @@ class Projets
     public function removeIdAC(AC $idAC): self
     {
         $this->idAC->removeElement($idAC);
+
+        return $this;
+    }
+
+    public function getCritique(): ?string
+    {
+        return $this->critique;
+    }
+
+    public function setCritique(?string $critique): self
+    {
+        $this->critique = $critique;
 
         return $this;
     }

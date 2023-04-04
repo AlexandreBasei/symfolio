@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Noter;
 use App\Entity\Projets;
 use App\Form\ProjetAddType;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,27 @@ class ProjetController extends AbstractController
 {
     public function projets(ManagerRegistry $doctrine, Request $request): Response
     {
-        return $this->render('projet/accueil_proj.html.twig');
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository(Projets::class);
+        $projets = $repository->findAll();
+
+        $repository2 = $em->getRepository(Noter::class);
+        $notes = $repository2->findAll();
+
+        foreach ($projets as $projet) {
+            $tag = $projet->getTag();
+            $tag = unserialize($tag);
+            $tag = implode(" ", $tag);
+        }
+
+        return $this->render(
+            'projet/accueil_proj.html.twig',
+            array(
+                'projets' => $projets,
+                'notes' => $notes,
+                'tag' => $tag,
+            )
+        );
     }
 
     //Méthode permettant d'utiliser la fonction explode avec plusieurs séparateurs
@@ -33,6 +54,10 @@ class ProjetController extends AbstractController
         $projet = new Projets();
 
         $em = $doctrine->getManager();
+        // $repository = $em->getRepository(User::class);
+        // $users = $repository->findBy(
+        //     array('id' => $id0)
+        // );
 
         $user = $this->getUser()->getId();
 
