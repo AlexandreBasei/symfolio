@@ -46,7 +46,11 @@
 
         <h2>Projets</h2>
         {% for projet in projets %}
-                <h3>{{ projet.nom }}</h3>
+                <h3>
+                    {{ projet.nom }}
+                    <a id="supprimer" class="bouton" href="{{ url('delete_projet', {'idProjet': projet.id, 'idUser': projet.idUser.id, 'idPage': id}) }}">Supprimer</a>
+                    <a id="modifier" class="bouton" href="{{ url('edit_projet', {'idProjet': projet.id, 'idUser': projet.idUser.id, 'idPage': id}) }}">Modifier</a>
+                </h3>
                 <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
                 <img src={{ asset(projet.image) }} alt="Image du projet">
                 <p>Tags : {{ tag }}</p>

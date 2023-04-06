@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 
 <head>
@@ -28,7 +28,9 @@
         </lord-icon></a>
 
         <div>
-            <h1>Modifier le projet {{ projet.nom }}</h1>
+            
+                <h1>Modifier le projet {{ projet[0].nom }}</h1>
+            
         </div>
 
         <ul id="menu_deroulant">
@@ -66,69 +68,71 @@
   
    <main style='padding-left:15vw;'>
        <section>
-        {{ form_start(projForm) }}
-           <article class="porfolio">
-                <h4>Nom du projet :</h4>
-                <br/>
-                {{ form_row(projForm.nom, {'value': projet.nom}) }}
-                
-               <h4>Visuel de votre projet:</h4>
-                    {{ form_row(projForm.image) }}
-               </article>
-
-
-           <article>
-               <h4>Description:</h4>
-               {{ form_row(projForm.description, {'value': projet.description}) }}
-
-
-           </article>
+       
+            {{ form_start(projForm) }}
+            <article class="porfolio">
+                    <h4>Nom du projet :</h4>
+                    <br/>
+                    {{ form_row(projForm.nom, {'value': projet[0].nom}) }}
                     
-            <article>
-                <h4>tags :</h4>
+                <h4>Visuel de votre projet:</h4>
+                        {{ form_row(projForm.image) }}
+                </article>
 
-                {{ form_row(projForm.tag, {'value': projet.tag}) }}   
-            </article>
-            <h4>date de publication :</h4>
-            {{ form_row(projForm.date_publi) }}
 
             <article>
-                
+                <h4>Description:</h4>
+                {{ form_row(projForm.description, {'value': projet[0].description}) }}
+
+
             </article>
-           <article>
+                        
+                <article>
+                    <h4>tags :</h4>
+
+                    {{ form_row(projForm.tag, {'value': tag}) }}   
+                </article>
+                <h4>date de publication :</h4>
+                {{ form_row(projForm.date_publi) }}
+
+                <article>
+                    
+                </article>
+            <article>
 
 
-               <h4>Apprentissages critiques concernés:</h4>
+                <h4>Apprentissages critiques concernés:</h4>
 
-            <div class="first">
-                {{ form_row(projForm.idAc, {'value': projet.idAc.nom}) }}
-            </div>
+                <div class="first">
+                    {{ form_row(projForm.idAc, {'value': projet[0].idAc}) }}
+                </div>
 
-            <!-- <div class="second">
-               <input type="checkbox" name="AC5" id="">
-               <label for="ac">AC 5</label>
-        
-               <input type="checkbox" name="AC6" id="">
-               <label for="ac">AC 6</label>
-        
-               <input type="checkbox" name="AC7" id="">
-               <label for="ac">AC 7</label>
-        
-               <input type="checkbox" name="AC8" id="">
-               <label for="ac">AC 8</label>
-            </div> -->
+                <!-- <div class="second">
+                <input type="checkbox" name="AC5" id="">
+                <label for="ac">AC 5</label>
+            
+                <input type="checkbox" name="AC6" id="">
+                <label for="ac">AC 6</label>
+            
+                <input type="checkbox" name="AC7" id="">
+                <label for="ac">AC 7</label>
+            
+                <input type="checkbox" name="AC8" id="">
+                <label for="ac">AC 8</label>
+                </div> -->
 
-           </article>
+            </article>
 
-           <article>
+            <article>
 
-           </article>
+            </article>
 
 
-           <section>
-            <button type="submit" class="btn">Créer le projet</button>
-        </section>
+            <section>
+                <button type="submit" class="btn">Créer le projet</button>
+            </section>
         {{ form_end(projForm) }}
+        
        </section>
    </main>
    <footer><span>Footer</span></footer>

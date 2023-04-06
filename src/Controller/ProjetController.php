@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Noter;
 use App\Entity\Projets;
 use App\Form\ProjetAddType;
+use App\Form\ProjetEditType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -147,8 +148,12 @@ class ProjetController extends AbstractController
                 $em = $doctrine->getManager();
                 $repository = $em->getRepository(Projets::class);
                 $projet = $repository->find($idProjet);
+                
+                if (!$projet) {
+                    throw $this->createNotFoundException("Le projet avec l'ID $idProjet n'existe pas");
+                }
 
-                $form = $this->createForm(ProjetAddType::class, $projet);
+                $form = $this->createForm(ProjetEditType::class, $projet, ['compound' => true]);
                 $form->handleRequest($request);
                 
                 
@@ -186,15 +191,16 @@ class ProjetController extends AbstractController
                     return $this->redirectToRoute('profil', ['id' => $idPage]);
                 }
 
-                return $this->redirectToRoute('profil', [
+                $projet2 = $repository->findBy(['id' => $idProjet]);
+                $tag2 = implode(',', unserialize($projet2[0]->getTag()));
+
+                return $this->render('projet/edit_proj.html.twig', [
                     'id' => $idPage,
-                    'projet' => $projet,
+                    'projet' => $projet2,
+                    'tag' => $tag2,
                     'projForm' => $form->createView(),
                 ]);
             }
         }
-
-        return $this->redirectToRoute('profil', ['id' => $idPage]);
-
     }
 }
