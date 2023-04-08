@@ -203,4 +203,13 @@ class ProjetController extends AbstractController
             }
         }
     }
+
+    public function search($idProjet, $idUser, $idPage, ManagerRegistry $doctrine, Security $security, Request $request, SluggerInterface $slugger): Response{
+       $projets = DB::table('projets')
+        ->select(DB::raw('count(*) as total, projets')) 
+        ->groupBy('projets')
+        ->get();
+
+        return response()->json($projet);
+    }
 }

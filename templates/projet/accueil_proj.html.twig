@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
     <link rel="stylesheet" href="{{ asset('css/button.css') }}">
-    <script src="/js/angular.min.js"></script>
-    <script src="/js/services/search.js"></script>
-    <script src="/js/controllers/search.js"></script>
+    <script src="{{ asset('js/angular.min.js') }}"></script>
+    <script src="{{ asset('js/services/search.js') }}"></script>
+    <script src="{{ asset('js/controllers/search.js') }}"></script>
 </head>
 
-<body>
+<body ng-app='myApp'>
    <header>
        <nav>
         <a href="{{ url('projets') }}" class="home"><lord-icon
@@ -84,18 +84,14 @@
             </article>
         </section>
 
-        <section>
+        <section ng-controller='SearchController'>
             <h5>Tous les Portfolios</h3>
             
             {# CODE QUI EST CENSÉ FONCTIONNER #}
             
-            {# {% extends 'base.html.twig' %}
-
-            {% block body %}
                 <!-- Incluez la vue AngularJS -->
                 <div ng-include="'/templates/search.html'"></div>
-            {% endblock %}
-             #}
+        
                 {% for projet in projets %}
                     <h3>{{ projet.nom }}</h3>
                     <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
