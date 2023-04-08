@@ -59,7 +59,11 @@
                 <section>
                     <article>
                         <div class="absolute">
-                        <h4>Votre photo de profil :</h4>
+                        {% if monProfil %}
+                            <h4>Votre photo de profil :</h4>
+                        {% else %}
+                            <h4>Photo de profil</h4>
+                        {% endif %}
                         <div id="f">
                             <div id="bg-img-fp">
                                 <img src={{ asset(user.photo) }} alt="Photo de profil">
@@ -95,45 +99,58 @@
                 <input class="modify" type="submit" value="Modifier">
             </section> -->
         </section>
-        {{ form_start(noteForm) }}
-            {{ form_widget(noteForm) }}
 
-            <button type="submit" class="btn">Noter</button>
-        {{ form_end(noteForm) }}
-        <h2>Projets</h2>
         {% if monProfil %}
-            <button><a href="{{ url('addprojet') }}">Ajouter un projet</a></button>
-        {% endif %}
-        {% for projet in projets %}
-                <h3>{{ projet.nom }}</h3>
-                <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
-                <img class='imgProjet' src={{ asset(projet.image) }} alt="Image du projet">
-                <p>Tags : {{ tag }}</p>
-                <p>Description : {{ projet.description }}</p>
-                <h3>Commentaires</h3>
-                    <ul>
-                        {% set break = false %}
-                        {% for note in notes %}
-                            {% if break == false %}
-                                {% if note.idProjet.id != projet.id %}
-                                    <p>Ce projet n'a reçu aucun commentaire</p>
-                                    {% set break = true %}
-                                {% else %}
-                                
-                                    <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
-                                {% for user in users %}
-                                     {% if id0 == note.idUser.id %} {#Afficher un bouton supprimer à côté des commentaires écrits par l'utilisateur connecté #}
-                                     
-                                            <button><a href="{{ url('delete_comment', {'idNote': note.id, 'idUser': note.idUser.id, 'idPage': id}) }}">Supprimer</a></button>
+            <h4>Vos commentaires</h4>
+            {% set break = false %}
+            {% for note in notes %}
+                {% if break == false %}
+                    {% if note.idUser.id == id0 %}
+                        <h5>À <a href="{{ url('profil', {'id': note.idProjet.idUser.id}) }}">{{ note.idProjet.idUser.email }}</a> sur le projet {{ note.idProjet.nom }} : {{ note.commentaire }}, note : {{ note.note }} <a id="supprimer" class="bouton" href="{{ url('delete_comment', {'idNote': note.id, 'idUser': note.idUser.id, 'idPage': id}) }}">Supprimer</a></h5>
+                    {% endif %}
+                {% else %}
+                    <h5>Vous n'avez posté aucun commentaire</h5>
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+
+            {{ form_start(noteForm) }}
+                {{ form_widget(noteForm) }}
+
+                <button type="submit" class="btn">Noter</button>
+            {{ form_end(noteForm) }}
+            <h2>Projets</h2>
+            {% for projet in projets %}
+                    <h3>{{ projet.nom }}</h3>
+                    <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
+                    <img class='imgProjet' src={{ asset(projet.image) }} alt="Image du projet">
+                    <p>Tags : {{ tag }}</p>
+                    <p>Description : {{ projet.description }}</p>
+                    <h3>Commentaires</h3>
+                        <ul>
+                            {% set break = false %}
+                            {% for note in notes %}
+                                {% if break == false %}
+                                    {% if note.idProjet.id != projet.id %}
+                                        <p>Ce projet n'a reçu aucun commentaire</p>
+                                        {% set break = true %}
+                                    {% else %}
+            
+                                        <li>{{ note.idUser.email }} : {{note.commentaire}}, {{ note.note }}/20</li>
+                                    
+                                        {% if id0 == note.idUser.id %} {#Afficher un bouton supprimer à côté des commentaires écrits par l'utilisateur connecté #}
+                                        
+                                                <button><a href="{{ url('delete_comment', {'idNote': note.id, 'idUser': note.idUser.id, 'idPage': id}) }}">Supprimer</a></button>
+
+                                        {% endif %}
 
                                     {% endif %}
-                                {% endfor %}
-
                                 {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-        {% endfor %}
+                            {% endfor %}
+                        </ul>
+            {% endfor %}
+        {% endif %}
     </main>
     <footer><span>Footer</span></footer>
     
