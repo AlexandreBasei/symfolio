@@ -11,11 +11,10 @@
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
     <link rel="stylesheet" href="{{ asset('css/button.css') }}">
     <script src="{{ asset('js/angular.min.js') }}"></script>
-    <script src="{{ asset('js/services/search.js') }}"></script>
-    <script src="{{ asset('js/controllers/search.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
 </head>
 
-<body ng-app='myApp'>
+<body>
    <header>
        <nav>
         <a href="{{ url('projets') }}" class="home"><lord-icon
@@ -84,13 +83,28 @@
             </article>
         </section>
 
-        <section ng-controller='SearchController'>
+        <section>
             <h5>Tous les Portfolios</h3>
             
             {# CODE QUI EST CENSÉ FONCTIONNER #}
             
                 <!-- Incluez la vue AngularJS -->
-                <div ng-include="'/templates/search.html'"></div>
+            <div class="search" ng-app="myApp" ng-controller="myController">
+                <form ng-submit="getResults()">
+                    <input type="text" name="search" placeholder="Rechercher..." ng-model="search"></input>
+                    <button type="submit"><i class="bi bi-search"></i></button>
+                </form>
+
+                <ul ng-show="showResults" class="header-search-result shadow-md">
+                    <li class="titre-search">
+                        <p>Résultats pour : [[ search ]]</p>
+                    </li>
+                    <hr>
+                    <li ng-repeat="result in results" class="header-result">
+                        <a href="/portfolio/[[result.id_projet]]">[[result.titre_projet]]</a>
+                    </li>
+                </ul>
+            </div>
         
                 {% for projet in projets %}
                     <h3>{{ projet.nom }}</h3>

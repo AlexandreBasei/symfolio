@@ -100,16 +100,12 @@
             </section> -->
         </section>
 
+        {% for user in users %}
         {% if monProfil %}
-            <h4>Vos commentaires</h4>
-            {% set break = false %}
+            <h2>Vos commentaires</h2>
             {% for note in notes %}
-                {% if break == false %}
-                    {% if note.idUser.id == id0 %}
-                        <h5>À <a href="{{ url('profil', {'id': note.idProjet.idUser.id}) }}">{{ note.idProjet.idUser.email }}</a> sur le projet {{ note.idProjet.nom }} : {{ note.commentaire }}, note : {{ note.note }} <a id="supprimer" class="bouton" href="{{ url('delete_comment', {'idNote': note.id, 'idUser': note.idUser.id, 'idPage': id}) }}">Supprimer</a></h5>
-                    {% endif %}
-                {% else %}
-                    <h5>Vous n'avez posté aucun commentaire</h5>
+                {% if note.idUser.id == id0 %}
+                    <h5>À <a href="{{ url('profil', {'id': note.idProjet.idUser.id}) }}">{{ note.idProjet.idUser.email }}</a> sur le projet {{ note.idProjet.nom }} : {{ note.commentaire }}, note : {{ note.note }}/20 <a id="supprimer" class="bouton" href="{{ url('delete_comment', {'idNote': note.id, 'idUser': note.idUser.id, 'idPage': id}) }}">Supprimer</a></h5>
                 {% endif %}
             {% endfor %}
 
@@ -151,6 +147,7 @@
                         </ul>
             {% endfor %}
         {% endif %}
+    {% endfor %}
     </main>
     <footer><span>Footer</span></footer>
     

@@ -41,3 +41,6 @@ delete_projet:
 edit_projet:
     path: '/projet/edit/{idProjet}/{idUser}/{idPage}'
     controller: App\Controller\ProjetController::edit_projet
+recherche:
+    path: '/search/{nom}'
+    controller: App\Controller\ProjetController::search

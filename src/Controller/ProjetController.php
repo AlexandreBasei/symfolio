@@ -2,8 +2,10 @@
 namespace App\Controller;
 
 use App\Entity\Noter;
+use Doctrine\DBAL\Connection;   
 use App\Entity\Projets;
 use App\Form\ProjetAddType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Form\ProjetEditType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -204,12 +206,15 @@ class ProjetController extends AbstractController
         }
     }
 
-    public function search($idProjet, $idUser, $idPage, ManagerRegistry $doctrine, Security $security, Request $request, SluggerInterface $slugger): Response{
-       $projets = DB::table('projets')
-        ->select(DB::raw('count(*) as total, projets')) 
-        ->groupBy('projets')
-        ->get();
-
-        return response()->json($projet);
+    public function search($nom, Request $request, Connection $connection): Response
+    {
+        $queryBuilder = $connection->createQueryBuilder();
+        $queryBuilder->select('COUNT(*) as total', 'nom')
+            ->from('projets')
+            ->groupBy('nom');
+    
+        $projets = $queryBuilder->execute()->fetchAll();
+    
+        return $this->json($projets);
     }
 }
