@@ -1,0 +1,12 @@
+<!-- public/templates/search.html -->
+
+<div ng-controller="SearchController">
+    <form ng-submit="search()">
+        <input type="text" ng-model="searchTerm">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <ul>
+        <li ng-repeat="result in results">{{result.title}}</li>
+    </ul>
+</div>

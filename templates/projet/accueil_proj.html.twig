@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Symfolio - Accueil</title>
     {# <link rel="stylesheet" href="../../public/css/accueil.css"> #}
-     <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
-       <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/button.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/button.css') }}">
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/services/search.js"></script>
+    <script src="/js/controllers/search.js"></script>
 </head>
 
 <body>
@@ -70,19 +73,29 @@
             <article>
                 <h4>Les 5 compétences de la formation</h4>
                 <p>- <b>Comprendre :</b> la capacité à comprendre les enjeux et les mécanismes du monde numérique, ainsi que les besoins des utilisateurs et des clients.
-<br/>
-- <b>Entreprendre :</b> la capacité à mener un projet de A à Z, en prenant en compte les contraintes techniques, économiques et humaines.
-<br/>
-- <b>Développer :</b> la capacité à concevoir, coder et intégrer des solutions web, mobiles et multimédias en utilisant des langages de programmation et des outils spécifiques.
-<br/>
-- <b>Exprimer :</b> la capacité à communiquer efficacement ses idées, ses projets et ses réalisations à l'oral et à l'écrit, en utilisant les outils de communication adaptés.
-<br/>
-- <b>Concevoir :</b> la capacité à concevoir des interfaces, des expériences utilisateurs et des contenus multimédias, en utilisant des outils de design graphique et des méthodes de conception centrée utilisateur.</p>
+    <br/>
+    - <b>Entreprendre :</b> la capacité à mener un projet de A à Z, en prenant en compte les contraintes techniques, économiques et humaines.
+    <br/>
+    - <b>Développer :</b> la capacité à concevoir, coder et intégrer des solutions web, mobiles et multimédias en utilisant des langages de programmation et des outils spécifiques.
+    <br/>
+    - <b>Exprimer :</b> la capacité à communiquer efficacement ses idées, ses projets et ses réalisations à l'oral et à l'écrit, en utilisant les outils de communication adaptés.
+    <br/>
+    - <b>Concevoir :</b> la capacité à concevoir des interfaces, des expériences utilisateurs et des contenus multimédias, en utilisant des outils de design graphique et des méthodes de conception centrée utilisateur.</p>
             </article>
         </section>
 
         <section>
             <h5>Tous les Portfolios</h3>
+            
+            {# CODE QUI EST CENSÉ FONCTIONNER #}
+            
+            {# {% extends 'base.html.twig' %}
+
+            {% block body %}
+                <!-- Incluez la vue AngularJS -->
+                <div ng-include="'/templates/search.html'"></div>
+            {% endblock %}
+             #}
                 {% for projet in projets %}
                     <h3>{{ projet.nom }}</h3>
                     <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
@@ -109,6 +122,7 @@
         </section>
 
     </main>
+
     <footer><span>ALEXANDRE</span></footer>
 </body>
 
