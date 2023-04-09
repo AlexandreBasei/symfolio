@@ -18,9 +18,21 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ProjetController extends AbstractController
 {
+
+    private $logger;
+
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    
     public function projets(ManagerRegistry $doctrine, Request $request): Response
     {
         $em = $doctrine->getManager();
@@ -208,19 +220,26 @@ class ProjetController extends AbstractController
     }
 
 /**
- * @Route("/search/{searchTerm}", name="search")
+ * @Route("/search/{searchTerm}", name="search", methods={"GET"})
  */
-public function search(string $searchTerm = "", Connection $connection): JsonResponse
+public function search(Request $request, Connection $connection): JsonResponse
 {
     try {
+        $searchTerm = $request->query->get('searchTerm') ?? $request->get('searchTerm');
+        VarDumper::dump($searchTerm);
+        VarDumper::dump($request->query->all());
         $queryBuilder = $connection->createQueryBuilder();
+        
         $queryBuilder->select('COUNT(*) as total', 'nom')
             ->from('projets')
             ->where('nom LIKE :searchTerm')
-            ->setParameter('searchTerm', '%'.$searchTerm.'%')
+            ->setParameter('searchTerm', '%' . $searchTerm . '%')
             ->groupBy('nom');
 
+            VarDumper::dump($queryBuilder->getSQL());
+
         $projets = $queryBuilder->execute()->fetchAll();
+        VarDumper::dump($projets);
 
         return $this->json($projets);
     } catch (\Exception $e) {
@@ -228,5 +247,4 @@ public function search(string $searchTerm = "", Connection $connection): JsonRes
         throw $e;
     }
 }
-
 }

@@ -18,9 +18,7 @@ app.controller("myController", function($scope, $http, $q) {
         if ($scope.searchTerm.length >= 2) {
           $http.get(urlBase + $scope.searchTerm)
           .then(function(response) {
-            console.log("GETTTTTT = ", $http.get(urlBase + $scope.searchTerm));
               var results = response.data.slice(0, 3);
-              console.log("results = ", results); // affiche les résultats de la recherche
               $scope.results = results;
               $scope.showResults = true;
           })
