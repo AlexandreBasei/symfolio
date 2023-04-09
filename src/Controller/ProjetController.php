@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 // use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProjetController extends AbstractController
 {
@@ -206,15 +207,26 @@ class ProjetController extends AbstractController
         }
     }
 
-    public function search($nom, Request $request, Connection $connection): Response
-    {
+/**
+ * @Route("/search/{searchTerm}", name="search")
+ */
+public function search(string $searchTerm = "", Connection $connection): JsonResponse
+{
+    try {
         $queryBuilder = $connection->createQueryBuilder();
         $queryBuilder->select('COUNT(*) as total', 'nom')
             ->from('projets')
+            ->where('nom LIKE :searchTerm')
+            ->setParameter('searchTerm', '%'.$searchTerm.'%')
             ->groupBy('nom');
-    
+
         $projets = $queryBuilder->execute()->fetchAll();
-    
+
         return $this->json($projets);
+    } catch (\Exception $e) {
+        $this->logger->error($e->getMessage());
+        throw $e;
     }
+}
+
 }
