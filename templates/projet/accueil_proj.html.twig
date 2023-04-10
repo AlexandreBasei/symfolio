@@ -109,6 +109,7 @@
             </div>
         
                 {% for projet in projets %}
+                    <h3 class='user'> <a href="{{ url('profil', {'id': projet.idUser.id}) }}"> <img src=" {{ asset(projet.idUser.photo) }}" alt='Photo de profil'> {{ projet.idUser.email }}</a> </h3>
                     <h3>{{ projet.nom }}</h3>
                     <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
                     <img src={{ asset(projet.image) }} alt="Image du projet">

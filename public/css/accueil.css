@@ -13,6 +13,20 @@ h3 {
   margin: 0;
 }
 
+.user a{
+  color: #000;
+  position: relative;
+  text-decoration: underline;
+  font-size: 1.3rem;
+}
+
+.user img{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transform: translateY(15px);
+}
+
 nav {
   background-color: rgb(173, 42, 185);
   display: flex;
