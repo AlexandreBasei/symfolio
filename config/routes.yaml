@@ -32,6 +32,12 @@ profil:
 profil_api:
     path: '/api/profil/{id}'
     controller: App\Controller\UserController::api
+add_user_api:
+    path: '/api/user/add'
+    controller: App\Controller\UserController::apiadd
+del_user_api:
+    path: '/api/user/del'
+    controller: App\Controller\UserController::apidel
 ac_add:
     path: '/ac/add'
     controller: App\Controller\AcController::add

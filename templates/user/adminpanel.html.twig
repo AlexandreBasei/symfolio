@@ -9,7 +9,7 @@
     <script src="{{ asset('js/angular.min.js') }}"></script>
     {# <script src="{{ asset('js/admin.js') }}"></script> #}
     <script src={{ asset('js/acJS.js') }}></script>
-    <title>Symfolio - Profil</title>
+    <title>Symfolio - Espace Administrateur</title>
 </head>
 <body>
     <header>
@@ -25,21 +25,21 @@
             </lord-icon></a>
     
             <ul id="menu_deroulant">
-                <li><a href="{{ url('app_login') }}" class="arrow"><lord-icon
+                {# <li><a href="{{ url('app_login') }}" class="arrow"><lord-icon
                     src="https://cdn.lordicon.com/jxwksgwv.json"
                     trigger="hover"
                     colors="primary:#f5f5f5"
                     state="hover-3"
                     target=".arrow"
                     style="width:25px;height:25px">
-                </lord-icon>Se connecter</a></li>
+                </lord-icon>Se connecter</a></li> #}
                 <li><a href="{{ url('profil') }}" class="page"><lord-icon
                     src="https://cdn.lordicon.com/ogkplaef.json"
                     trigger="hover"
                     colors="primary:#f5f5f5"
                     target=".page"
                     style="width:25px;height:25px">
-                </lord-icon>Mon portfolio</a></li>
+                </lord-icon>Mon profil</a></li>
                 <li><a href="{{ url('projets') }}" class="book"><lord-icon
                     src="https://cdn.lordicon.com/qvbrkejx.json"
                     trigger="morph"
@@ -126,6 +126,67 @@
                         <select name='id' ng-model='id'>
                             {% for iut in iuts %}
                                 <option value='{{ iut.id }}'>{{ iut.nom }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                    <button type="submit">Supprimer</button>
+                </form>
+            </div>
+        </section>
+
+
+        <section ng-controller="myCtrl">
+            <button class="bouton" ng-click="showDiv5 = !showDiv5">Créer un utilisateur</button>
+            <div ng-show="showDiv5">
+                <form ng-submit='envoyerUser()'>
+                    <label>Email :</label>
+                    <input type="text" name="email" ng-model="email">
+                    <br>
+
+                    <label>Mot de passe :</label>
+                    <input type="password" name="pwd" ng-model="pwd">
+                    <br>
+
+                    <label>IUT :</label>
+                    <select name='iut' ng-model='iut'>
+                        {% for iut in iuts %}
+                            <option value='{{ iut.nom }}'>{{ iut.nom }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+
+                    <label>Niveau :</label>
+                    <select name='niveau' ng-model='niveau'>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <br>
+                    
+                    <label>Description :</label>
+                    <input type='textarea' name='desc' ng-model='desc'>
+                    <br>
+
+                    <label>Rôle :</label>
+                    <select name='role' ng-model='role'>
+                        <option value="etudiant">Étudiant</option>
+                        <option value="prof">Professeur</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
+
+                    <button type="submit">Ajouter</button>
+                </form>
+            </div>
+        </section>
+
+        <section ng-controller="myCtrl">
+            <button id="supprimer" class="bouton" ng-click="showDiv5 = !showDiv5">Supprimer un utilisateur</button>
+            <div ng-show="showDiv5">
+                    <form ng-submit='supprUser()'>
+                        <label>Email de l'utilisateur :</label>
+                        <select name='id' ng-model='id'>
+                            {% for user in users %}
+                                <option value='{{ user.id }}'>{{ user.email }}</option>
                             {% endfor %}
                         </select>
                         <br>
