@@ -244,16 +244,8 @@ class UserController extends AbstractController
                     $repository2 = $em->getRepository(Iut::class);
                     $iut = $repository2->findAll();
 
-                    // $iut = new Iut();
-
-                    // $form3 = $this->createForm(IutType::class, $iut);
-                    // $form3->handleRequest($request);
-            
-                    // if ($form3->isSubmitted()) {
-                    //     $em = $doctrine->getManager();
-                    //     $em->persist($iut);
-                    //     $em->flush(); //C'est là qu'est inséré l'IUT
-                    // }
+                    $repository3 = $em->getRepository(User::class);
+                    $users = $repository3->findAll();
                 }
             }
 
@@ -262,7 +254,76 @@ class UserController extends AbstractController
                 array(
                     'acs' => $ac,
                     'iuts' => $iut,
+                    'users' => $users,
                 )
             );
+        }
+
+        public function apiadd(ManagerRegistry $doctrine, Request $request): Response
+        {
+            $data = json_decode($request->getContent(), true);
+
+            $email = $data['email'];
+            $pwd = $data['pwd'];
+            $iut = $data['iut'];
+            $niveau = $data['niveau'];
+            $desc = $data['desc'];
+            $role = $data['role'];
+          
+            $user = new User();
+    
+            $user->setEmail($email);
+            $user->setPassword(password_hash($pwd, PASSWORD_DEFAULT));
+            $user->setIut($iut);
+            $user->setNiveau($niveau);
+            $user->setDescription($desc);
+            $user->setPhoto("images/default.jpg");
+            $user->setDisplay(0);
+
+            if ($role == 'etudiant')
+            {
+                $user->setRoles(array("ROLE_ETUDIANT"));
+            }
+            elseif ($role == 'prof')
+            {
+                $user->setRoles(array("ROLE_PROF"));
+            }
+            else
+            {
+                $user->setRoles(array("ROLE_ADMIN"));
+            }
+    
+            $em = $doctrine->getManager();
+            $em->persist($user);
+            $em->flush();
+          
+            $response = new Response();
+            $response->setContent(json_encode(array('success' => true)));
+            $response->headers->set('Content-Type', 'application/json');
+          
+            return $response;
+        }
+
+        public function apidel(ManagerRegistry $doctrine, Request $request): Response
+        {
+            $data = json_decode($request->getContent(), true);
+
+            // $data = ['id' => 11];
+
+            $id = $data['id'];
+    
+            $em = $doctrine->getManager();
+            $repository = $em->getRepository(User::class);
+            $user = $repository->find($id);
+        
+            // Suppression du projet
+            $em->remove($user);
+            $em->flush();
+    
+            $response = new Response();
+            $response->setContent(json_encode(array('success' => true)));
+            $response->headers->set('Content-Type', 'application/json');
+          
+            return $response;
         }
 }
