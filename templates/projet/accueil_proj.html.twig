@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Symfolio - Accueil</title>
     {# <link rel="stylesheet" href="../../public/css/accueil.css"> #}
-    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
     <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
     <link rel="stylesheet" href="{{ asset('css/button.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+    
     <script src="{{ asset('js/angular.min.js') }}"></script>
     <script src="{{ asset('js/search.js') }}"></script>
+    <script src="{{ asset('js/menumobile.js') }}"></script>
 </head>
 
-<body>
-   <header>
+<header>
        <nav>
         <a href="{{ url('projets') }}" class="home"><lord-icon
             src="https://cdn.lordicon.com/slduhdil.json"
@@ -27,7 +28,7 @@
         </lord-icon></a>
 
         <div>
-            <h1>Accueil</h1>
+            <h1>{% block title %}Symfolio - Accueil{% endblock %}</h1>
         </div>
 
         <ul id="menu_deroulant">
@@ -59,7 +60,6 @@
   
        </nav>
    </header>
-        <h3>Symfolio</h3>
 
     <main>
         <section>
@@ -92,8 +92,10 @@
             <div class="search" ng-app="myApp" ng-controller="myController">
                 <form ng-submit="getResults()">
                     <input type="text" name="searchTerm" placeholder="Rechercher..." ng-model="searchTerm"></input>
-                    <button type="submit"><i class="bi bi-search"></i></button>
+                    <button type="submit"><i class="bi bi-search">Rechercher</i></button>
                 </form>
+
+                 <br/><hr><br/>
 
                 <ul ng-show="showResults" class="header-search-result shadow-md">
                     <li class="titre-search">
@@ -110,6 +112,7 @@
                     <h3>{{ projet.nom }}</h3>
                     <h4>Date de création du projet {{ projet.datepubli |date('d-m-Y') }}</h4>
                     <img src={{ asset(projet.image) }} alt="Image du projet">
+                    <br/>
                     <p>Tags : {{ tag }}</p>
                     <p>Description : {{ projet.description }}</p>
                     <h3>Commentaires</h3>

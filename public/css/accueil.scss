@@ -15,18 +15,13 @@ h3{
     
 }
 
-header{
-    background-color: purple;
-    height: 50px;
-    padding-bottom: 20px;
-    padding-top: 40px;
-    padding-left: 30px;
-
-
-    h3{
-        color: white;
-    }
-}
+nav {
+    background-color: rgb(173, 42, 185);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 60px;
+ }
 
 main{
 
@@ -37,9 +32,15 @@ main{
         h4, h5{
             text-decoration: underline;
         }
-        p, img {
+
+        p{
+            
+        }
+
+        img {
             display: inline-block;
-         }
+            width: 85vw;
+        }
     }
 }
 
@@ -49,4 +50,26 @@ footer{
     color: black;
     padding-top: 20px;
     padding-left: 30px;
+}
+
+@media screen and (min-width: 900px) {
+
+    main{
+        section{
+            h4, h5{
+                text-decoration: underline;
+            }
+    
+            p{
+                
+            }
+    
+            img {
+                display: inline-block;
+                height: 15vw;
+            }
+        }
+    }
+
+
 }

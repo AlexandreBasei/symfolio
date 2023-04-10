@@ -41,7 +41,7 @@ nav ul {
 nav div.menu_burger {
     width: 60px;
     height: 100%;
-    background-image: url(../img/svg/btn_menu.svg);
+    background-image: url(../images/svg/btn_menu.svg);
     cursor: crosshair;
     z-index: 2;
     position: absolute;
@@ -50,7 +50,7 @@ nav div.menu_burger {
 }
 
 nav div.ouvert {
-    background-image: url(../img/svg/btn_fermer.svg);
+    background-image: url(../images/svg/btn_fermer.svg);
 }
 
 a {

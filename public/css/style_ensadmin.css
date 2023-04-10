@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +10,7 @@
  }
  
  html body {
- 
+    font-family: "Poppins";
      height: 100vh;
  }
  
@@ -16,6 +18,8 @@
      text-transform: uppercase;
  }
  
+ 
+
  nav {
     background-color: rgb(255, 68, 68);
      display: flex;
@@ -25,7 +29,8 @@
  }
  
  div.connection {
-     position: absolute;
+     /* position: absolute; */
+     margin-top: 5vh;
      width: 100vw;
      bottom: 10vh;
      display: flex; 
@@ -40,10 +45,11 @@
      display: flex;
      align-items: center;
      justify-content: center;
-     padding-top: 10%;
+     padding-top: 5%;
+     font-size: 1.2em;
  }
  
- .champ {
+ .login_label {
      padding-top: 50px;
  }
  
@@ -52,7 +58,7 @@
      align-items: center;
      justify-content: center;
      flex-direction: column;
-     padding-top: 10%;
+     /* padding-top: 10%; */
      
  }
  
@@ -82,7 +88,7 @@ li {
     left: 3%;
     top: 25%;
 }
-.connection button {
+.connection button, .connection button a {
     background:rgb(255, 68, 68);
     color:#fff;
     border:none;
@@ -96,6 +102,15 @@ li {
     border-radius: 10px;
 
 }
+
+.connection button{
+    margin-right: 10px;
+}
+
+.connection button a {
+    top: 0;
+}
+
 .button_admin {
     position: absolute;
     top: 70px;
@@ -149,22 +164,20 @@ nav ul {
     
 }
 
-
-nav div.menu_burger {
-    width: 60px;
-    height: 100%;
-    background-image: url(../img/svg/btn_menu.svg);
-    cursor: crosshair;
-    z-index: 2;
-    position: absolute;
-    right: 2%;
-    background-repeat: no-repeat;
+.logo{
+    padding: 10px 0 0 10px;
 }
 
-nav div.ouvert {
-    background-image: url(../img/svg/btn_fermer.svg);
+#mini-a{
+    font-size: 1em;
+    color: blue;
 }
 
+.btn.disabled {
+    opacity: 0.6;
+    cursor: default;
+    pointer-events: none;
+}
 
 @media screen and (min-width: 900px) {
 
@@ -172,6 +185,7 @@ nav div.ouvert {
         width: 100vw;
     } 
     a {
+        position:initial;
         text-decoration: none;
         color: black;
         font-size: 25px;
@@ -194,11 +208,7 @@ nav div.ouvert {
         padding: 0%;
         display: inline-block;
         width: 20%;
-    }
-
-    #menu_burger{
-        display: none;
-    }   
+    } 
 
     ul#menu_deroulant {
         display: flex;
@@ -218,7 +228,7 @@ nav div.ouvert {
         display: flex;
         align-items: center;
     }
-
+    
     button{
         background:rgb(255, 68, 68);
         color:#fff;
@@ -232,6 +242,7 @@ nav div.ouvert {
         outline:none;
         border-radius: 10px;
       }
+      
       button:hover{
         background:#fff;
         color:rgb(255, 68, 68);
@@ -258,4 +269,5 @@ nav div.ouvert {
         width:100%;
         transition:800ms ease all;
       }
+      
 }

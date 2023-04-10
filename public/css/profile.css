@@ -213,14 +213,21 @@ footer {
   color: black;
   padding-top: 20px;
   padding-left: 30px;
-  width: 92%;
+  width: 100%;
   position: absolute;
 }
 
 @media screen and (min-width: 1280px) {
+  main {
+    bottom: initial;
+  }
   main #addProjet {
     width: 20vw;
     height: 10vh;
     font-size: 2rem;
+  }
+
+  footer{
+    bottom: -1px;
   }
 }/*# sourceMappingURL=profile.css.map */

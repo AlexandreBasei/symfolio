@@ -13,15 +13,12 @@ h3 {
   margin: 0;
 }
 
-header {
-  background-color: purple;
-  height: 50px;
-  padding-bottom: 20px;
-  padding-top: 40px;
-  padding-left: 30px;
-}
-header h3 {
-  color: white;
+nav {
+  background-color: rgb(173, 42, 185);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
 }
 
 main {
@@ -31,8 +28,9 @@ main {
 main section h4, main section h5 {
   text-decoration: underline;
 }
-main section p, main section img {
+main section img {
   display: inline-block;
+  width: 85vw;
 }
 
 footer {
@@ -41,4 +39,14 @@ footer {
   color: black;
   padding-top: 20px;
   padding-left: 30px;
+}
+
+@media screen and (min-width: 900px) {
+  main section h4, main section h5 {
+    text-decoration: underline;
+  }
+  main section img {
+    display: inline-block;
+    height: 15vw;
+  }
 }/*# sourceMappingURL=accueil.css.map */

@@ -245,7 +245,7 @@ footer{
     color: black;
     padding-top: 20px;
     padding-left: 30px;
-    width: 92%;
+    width: 100%;
     position: absolute;
    
 }
@@ -257,5 +257,7 @@ footer{
       height: 10vh;
       font-size: 2rem;
     }
+
+    bottom: initial;
   }
 }

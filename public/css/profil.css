@@ -24,7 +24,7 @@ main section {
 }
 main section article {
   position: relative;
-  width: 100vw;
+  /* width: 100vw; */
   /* Masquer le bouton d'origine */
   /* Style du bouton personnalisé */
   /* Lorsqu'on survole le bouton */
@@ -106,6 +106,10 @@ main section p, main section input[type=textarea] {
   padding: 10px 0px 23vh 10px;
   color: rgb(146, 144, 144);
   width: 85%;
+}
+
+header h1{
+  color: white;
 }
 
 /* Masquer les boutons radio d'origine */
@@ -244,7 +248,7 @@ img .imgProjet {
 
     footer {
         position: absolute;
-        bottom: 0;
+        
     }
 
     main section article .custom-file-button { 
