@@ -33,6 +33,23 @@ main section img {
   width: 85vw;
 }
 
+label {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #666;
+  color: #fff;
+  border-radius: 4px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+textarea {
+  height: 20vh;
+  width: 40vw;
+}
+
 footer {
   background-color: #BEAEC6;
   height: 50px;

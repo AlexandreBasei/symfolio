@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Portfolio</title>
-   <link rel="stylesheet" href="{{ asset('css/pf.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/button.css') }}">
-  <script src="{{ asset('js/menumobile.js')}}"></script>
-   <!-- <link rel="stylesheet" href="{{ asset('css/accueil.css') }}"> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symfolio - Projet</title>
+    {# <link rel="stylesheet" href="../../public/css/accueil.css"> #}
+    <link rel="stylesheet" href="{{ asset('css/burger.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/button.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+    
+    <script src="{{ asset('js/angular.min.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
+    <script src="{{ asset('js/menumobile.js') }}"></script>
 </head>
 
-
 <body>
-   <header>
-       <nav>
+<header style="color: white;">
+       <nav style="background-color:blue;">
         <a href="{{ url('projets') }}" class="home"><lord-icon
             src="https://cdn.lordicon.com/slduhdil.json"
             trigger="hover"
@@ -28,7 +29,7 @@
         </lord-icon></a>
 
         <div>
-            <h1>Ajouter un projet</h1>
+            <h1>{% block title %}Symfolio - Projet{% endblock %}</h1>
         </div>
 
         <ul id="menu_deroulant">
@@ -64,7 +65,7 @@
 
   
   
-   <main style='padding-left:15vw;'>
+   <main style='padding-left:15vw; padding-top: 10vh; padding-bottom: 15vh;'>
        <section>
         {{ form_start(projForm) }}
            <article class="porfolio">
