@@ -62,4 +62,24 @@ class AcController extends AbstractController
       
         return $response;
     }
+
+    public function apidel(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $id = $data['id'];
+
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository(AC::class);
+        $ac = $repository->find($id);
+    
+        // Suppression du projet
+        $em->remove($ac);
+        $em->flush();
+
+        $response = new Response();
+        $response->setContent(json_encode(array('success' => true)));
+        $response->headers->set('Content-Type', 'application/json');
+      
+        return $response;
+    }
 }

@@ -99,9 +99,11 @@
                 <input class="modify" type="submit" value="Modifier">
             </section> -->
         </section>
+        
+        {% if monProfil %}
+            <a class="bouton" href="{{ url('adminpanel') }}">Espace administrateur</a>
 
         <section>
-        {% for user in users %}
             <h2>Commentaires</h2>
             {% for note in notes %}
                 {% if note.idUser.id == id0 %}
@@ -109,6 +111,7 @@
                 {% endif %}
             {% endfor %}
         </section>
+        {% endif %}
         
         <section>
             <h2>Projets</h2>
@@ -128,6 +131,14 @@
                     <img class='imgProjet' src={{ asset(projet.image) }} alt="Image du projet">
                     <p>Tags : {{ tag }}</p>
                     <p>Description : {{ projet.description }}</p>
+
+                    <h3>Apprentissages critiques concernés :</h3>
+                    <ul>
+                        {% for ac in acs %}
+                            <li>{{ ac }}, compétence {{ ac.competence }}</li>   
+                        {% endfor %}
+                    </ul>
+                    
                     <h3>Commentaires</h3>
                         <ul>
                             {% set break = false %}
@@ -145,7 +156,6 @@
                             {% endfor %}
                         </ul>
             {% endfor %}
-        {% endfor %}
 
             {{ form_start(noteForm) }}
             {{ form_widget(noteForm) }}
