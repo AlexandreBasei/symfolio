@@ -18,6 +18,12 @@ addprojet:
 iut_add:
     path: '/iut/add'
     controller: App\Controller\IutController::add
+iut_add_api:
+    path: '/api/iut/add'
+    controller: App\Controller\IutController::api
+iut_del_api:
+    path: '/api/iut/del'
+    controller: App\Controller\IutController::apidel
 profil:
     path: '/profil/{id}'
     controller: App\Controller\UserController::profil
@@ -32,6 +38,9 @@ ac_add:
 ac_add_api:
     path: '/api/ac/add'
     controller: App\Controller\AcController::api
+ac_del_api:
+    path: '/api/ac/del'
+    controller: App\Controller\AcController::apidel
 delete_comment:
     path: '/profil/note/delete/{idNote}/{idUser}/{idPage}'
     controller: App\Controller\UserController::delete_comment
@@ -44,3 +53,6 @@ edit_projet:
 recherche:
     path: '/search/{nom}'
     controller: App\Controller\ProjetController::search
+adminpanel:
+    path: '/adminpanel'
+    controller: App\Controller\UserController::adminpanel
