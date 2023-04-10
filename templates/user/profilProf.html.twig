@@ -123,6 +123,14 @@
                     <img class='imgProjet' src={{ asset(projet.image) }} alt="Image du projet">
                     <p>Tags : {{ tag }}</p>
                     <p>Description : {{ projet.description }}</p>
+
+                    <h3>Apprentissages critiques concernés :</h3>
+                    <ul>
+                        {% for ac in acs %}
+                            <li>{{ ac }}, compétence {{ ac.competence }}</li>   
+                        {% endfor %}
+                    </ul>
+
                     <h3>Commentaires</h3>
                         <ul>
                             {% set break = false %}

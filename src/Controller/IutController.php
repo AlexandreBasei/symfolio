@@ -41,4 +41,43 @@ class IutController extends AbstractController
         ]);
     }
 
+    public function api(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $nom = $data['nom'];
+      
+        $iut = new IUT();
+
+        $iut->setNom($nom);
+
+        $em = $doctrine->getManager();
+        $em->persist($iut);
+        $em->flush();
+      
+        $response = new Response();
+        $response->setContent(json_encode(array('success' => true)));
+        $response->headers->set('Content-Type', 'application/json');
+      
+        return $response;
+    }
+
+    public function apidel(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $id = $data['id'];
+
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository(Iut::class);
+        $iut = $repository->find($id);
+    
+        // Suppression du projet
+        $em->remove($iut);
+        $em->flush();
+
+        $response = new Response();
+        $response->setContent(json_encode(array('success' => true)));
+        $response->headers->set('Content-Type', 'application/json');
+      
+        return $response;
+    }
 }

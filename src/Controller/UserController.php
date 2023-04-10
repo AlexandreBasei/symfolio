@@ -4,6 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Noter;
 use App\Entity\Projets;
+use App\Entity\AC;
+use App\Entity\Iut;
+use App\Form\AcType;
+use App\Form\IutType;
+use App\Form\DeleteAcType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,6 +53,7 @@ class UserController extends AbstractController
         $id0 = 0;
         $tag = '';
         $monProfil = false;
+        $acId = "Ce projet n'est associé à aucun apprentissage critique";
 
         if ($security->isGranted('IS_AUTHENTICATED_FULLY')){
             $id0 = $this->getUser()->getId();
@@ -96,6 +102,8 @@ class UserController extends AbstractController
             $tag = $projet->getTag();
             $tag = unserialize($tag);
             $tag = implode(" ", $tag);
+
+            $acId = $projet->getIdAC();
         }
 
         $repository3 = $em->getRepository(Noter::class);
@@ -127,6 +135,7 @@ class UserController extends AbstractController
                     'projets' => $projets,
                     'notes' => $notes,
                     'tag' => $tag,
+                    'acs' => $acId,
                     'monProfil' => $monProfil,
                     'id0' => $id0,
                     'id' => $id,
@@ -153,6 +162,14 @@ class UserController extends AbstractController
                 $em->flush();
             }
 
+            foreach ($projets as $projet) {
+                $tag = $projet->getTag();
+                $tag = unserialize($tag);
+                $tag = implode(" ", $tag);
+    
+                $acId = $projet->getIdAC();
+            }
+
             return $this->render(
                 'user/profilAdmin.html.twig',
                 array(
@@ -161,6 +178,7 @@ class UserController extends AbstractController
                     'tag' => $tag,
                     'notes' => $notes,
                     'monProfil' => $monProfil,
+                    'acs' => $acId,
                     'id0' => $id0,
                     'id' => $id,
                     'noteForm' => $form->createView(),
@@ -174,6 +192,7 @@ class UserController extends AbstractController
                 array(
                     'users' => $users,
                     'projets' => $projets,
+                    'acs' => $acId,
                     'notes' => $notes,
                     'tag' => $tag,
                     'monProfil' => $monProfil,
@@ -193,12 +212,10 @@ class UserController extends AbstractController
 
             if ($id0 == $idUser || in_array("ROLE_ADMIN", $role)) //On vérifie que c'est bien l'utilisateur connecté qui veut supprimer un commentaire
             {
-                //Récupération du commentaire
                 $em = $doctrine->getManager();
                 $repository = $em->getRepository(Noter::class);
                 $note = $repository->find($idNote);
             
-                // Suppression du commentaire
                 $em->remove($note);
                 $em->flush();
             }
@@ -208,41 +225,44 @@ class UserController extends AbstractController
 
     }
 
-    public function api(){
-        // $em = $doctrine->getManager();
-        // $repository = $em->getRepository(User::class);
-        // $users = $repository->findBy(
-        //     array('id' => $id)
-        // );
+        public function adminpanel(Request $request, ManagerRegistry $doctrine, Security $security): Response
+        {
 
-        // $repository2 = $em->getRepository(Projets::class);
-        // $projets = $repository2->findBy(
-        //     array('idUser' => $id)
-        // );
+            $role = [];
+            $acdelete = 0;
 
-        // $data = array();
-        // foreach ($users as $user) {
-        //     foreach ($projets as $projet) {
-        //         $tag = $projet->getTag();
-        //         $tag = unserialize($tag);
-        //         $tag = implode(" ", $tag);
-        //         $data = array(
-        //             'email' => $user->getUserIdentifier(),
-        //             'iut' => $user->getIut(),
-        //             'niveau' => $user->getNiveau(),
-        //             'photo' => $user->getPhoto(),
-        //             'description' => $user->getDescription(),
-        //             'pNom' => $projet->getNom(),
-        //             'pDesc' => $projet->getDescription(),
-        //             'pImage' => $projet->getImage(),
-        //             'pTag' => $tag,
-        //             'pDate' => $projet->getDatePubli()
-        //         );
-        //     }
-        // }
-        // return new JsonResponse($data);
+            if ($security->isGranted('IS_AUTHENTICATED_FULLY')){
+                $role = $this->getUser()->getRoles();
 
-        $data = array('foo' => 'bar', 'baz' => 'qux');
-        return $this->render('user/profil.html.twig', array('data' => $data));
-    }
+                if (in_array("ROLE_ADMIN", $role))
+                {
+
+                    $em = $doctrine->getManager();
+                    $repository = $em->getRepository(AC::class);
+                    $ac = $repository->findAll();
+
+                    $repository2 = $em->getRepository(Iut::class);
+                    $iut = $repository2->findAll();
+
+                    // $iut = new Iut();
+
+                    // $form3 = $this->createForm(IutType::class, $iut);
+                    // $form3->handleRequest($request);
+            
+                    // if ($form3->isSubmitted()) {
+                    //     $em = $doctrine->getManager();
+                    //     $em->persist($iut);
+                    //     $em->flush(); //C'est là qu'est inséré l'IUT
+                    // }
+                }
+            }
+
+            return $this->render(
+                'user/adminpanel.html.twig',
+                array(
+                    'acs' => $ac,
+                    'iuts' => $iut,
+                )
+            );
+        }
 }
